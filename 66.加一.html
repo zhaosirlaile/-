@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        /**
+            * @param {number[]} digits
+            * @return {number[]}
+        */
+        var plusOne = function(digits) {
+            digits[digits.length - 1] ++;
+            for(var i = digits.length-1; i >= 0; i--) {
+                if(digits[i]> 9 && i>0) {
+                    console.log(digits);
+                    digits[i-1] ++;
+                    digits[i] = digits[i] % 10; 
+                }
+            }
+            if(digits[0] > 9) {
+                digits.unshift(1);
+                digits[1] = digits[1] % 10; 
+            }
+        };
+        console.log(plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]));
+    </script>
+</body>
+</html>

@@ -8,13 +8,12 @@
 <body>
     
     <script>
-
-        /**
-        * @param {string} num1
-        * @param {string} num2
-        * @return {string}
-        */
-        var addStrings = function(num1, num2) {
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+ var addStrings = function(num1, num2) {
             var i = num1.length - 1,
                 j = num2.length - 1,
                 result = '',
@@ -37,11 +36,7 @@
                 result = carry + result;
             }
             return result;
-
-        };
-        
-
-        console.log(addStrings("123456789","987654321"));
+};
     </script>
 </body>
 </html>

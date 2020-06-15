@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+ var isValid = function(s) {
+    s=s.split('');
+    var tmp = [];
+    while(s.length) {
+        tmp.push(s.shift());
+        if(tmp[tmp.length - 2] === '(' && tmp[tmp.length - 1] === ')'){
+            tmp.pop();
+            tmp.pop();
+        } else if(tmp[tmp.length - 2] === '[' && tmp[tmp.length - 1] === ']'){
+            tmp.pop();
+            tmp.pop();
+        } else if(tmp[tmp.length - 2] === '{' && tmp[tmp.length - 1] === '}'){
+            tmp.pop();
+            tmp.pop();
+        }
+
+    }
+    if(s.length === 0 && tmp.length === 0) {
+        return true 
+    } else {
+        return false
+    }
+};
+    </script>
+</body>
+</html>

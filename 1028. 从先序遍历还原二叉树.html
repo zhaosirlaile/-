@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {string} S
+ * @return {TreeNode}
+ */
+
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+ var recoverFromPreorder = function(S) {
+    function mysplit(str,splitStr) {
+        var result = [],splitList=[];
+        for(let i = 0; i < str.length; i++) {
+            if(str[i] === '-' && /[0-9]/.test(str[i-1]) && /[0-9]/.test(str[i+1])) {
+                console.log(i);
+            }
+        }
+    }
+    mysplit(S,'-')
+
+    // function createNode (s,splitStr) {
+    //     var splitdom = S.indexOf('-'),
+    //         rootNode = TreeNode(s.slice(splitdom));
+            
+    
+    // }
+
+    // return result;
+};
+let y = recoverFromPreorder('1-2--3--4-5--6--7');
+console.log(y);
+    </script>
+</body>
+</html>

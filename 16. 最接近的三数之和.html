@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+ var threeSumClosest = function(nums, target) {
+    nums.sort((a,b) => a-b)
+    let ans = nums[0] + nums[1] + nums[2];
+    for(let i =0 ; i<nums.length - 2; i++) {
+        const n1 = nums[i]
+        let left = i + 1,
+            right = nums.length -1;
+        while(left < right) {
+            const n2 = nums[left],
+                n3 = nums[right],
+                sum = n1 + n2 + n3;
+            sum > target ? right -- : left ++;
+            if(Math.abs(sum -target) < Math.abs(ans - target)) {
+                ans = sum;
+            }
+        }
+    }
+    return ans;
+};
+let y = threeSumClosest([-1,2,1,-4],2);
+console.log(y);
+
+    </script>
+</body>
+</html>

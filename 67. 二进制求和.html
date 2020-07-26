@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+ var addBinary = function(a, b) {
+    var tmp = 0,
+        sum,
+        result="";
+    for(let i = a.length -1,j=b.length-1; i >= 0 || j >=0; i--,j--) {
+        sum = tmp;
+        sum += i >=0 ? parseInt(a[i]) : 0;
+        sum += j >=0 ? parseInt(b[j]) : 0;
+        result = sum % 2 + result;
+        tmp = parseInt(sum / 2);
+    }
+    debugger;
+    if(tmp === 1) {
+        result = tmp + result;
+    }
+    return result;
+ }
+        console.log(addBinary("11","1"));
+    </script>
+</body>
+</html>

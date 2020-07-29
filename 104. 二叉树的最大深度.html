@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function(root) {
+    var LD = 0,
+        RD = 0;
+    if(!root) return 0;
+    if(root.left) {
+        LD = maxDepth(root.left)
+    }
+    if(root.right) {
+        RD = maxDepth(root.right)
+    }
+    if(!root.left && !root.right){
+        return 1;
+    }
+    return (LD > RD ? LD : RD) + 1;
+};
+        console.log(maxDepth([0],0,[1],1));
+    </script>
+</body>
+</html>

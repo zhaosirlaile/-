@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+  function TreeNode(val) {
+      this.val = val;
+      this.left = this.right = null;
+  } 
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isSymmetric = function(root) {
+    if(!root) return true
+    var isEqual = function (left, right) {
+        if(!left && !right) return true;
+        if(!left || !right) return false;
+
+        return left.val === right.val && isEqual(left.left,right.right) && isEqual(left.right,right.left);
+
+    }
+
+    return isEqual(root.left,root.right);
+};
+var p = new TreeNode(1),
+    q = new TreeNode(1);
+p.left = new TreeNode(2);
+p.right = new TreeNode(3);
+
+q.left = new TreeNode(2);
+q.right = new TreeNode(3);
+
+        console.log(isSymmetric(p,q));
+    </script>
+</body>
+</html>

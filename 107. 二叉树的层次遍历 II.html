@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+  function TreeNode(val) {
+      this.val = val;
+      this.left = this.right = null;
+  }
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrderBottom = function(root) {
+    if(!root) return [];
+    var queue = [root],
+        res = [],
+        levelNumber = 0;
+        debugger;
+    while(queue.length) {
+        let tmp = [];
+        res[levelNumber] = [];
+        for(let i = 0; i < queue.length ; i++) {
+            res[levelNumber].push(queue[i].val);
+            if(queue[i].left && queue[i].left.val !== null) {
+                tmp.push(queue[i].left);
+            } 
+            if(queue[i].right && queue[i].right.val !== null) {
+                tmp.push(queue[i].right);
+            }
+        }
+        queue = tmp;
+        levelNumber ++;
+    }
+    return res.reverse();
+};
+var p = new TreeNode(1);
+p.left = new TreeNode(2);
+p.right = new TreeNode(3);
+
+p.right.left = new TreeNode(null);
+p.right.right = new TreeNode(5);
+p.left.left = new TreeNode(4);
+p.left.right = new TreeNode(null);
+        console.log(levelOrderBottom(p));
+    </script>
+</body>
+</html>

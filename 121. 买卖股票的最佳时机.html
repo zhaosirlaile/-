@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+ var maxProfit = function(prices) {
+    var minPrice = prices[0],
+        maxProfit = 0;
+    prices.forEach(e => {
+        if(e < minPrice)  minPrice = e;
+        if(e - minPrice > maxProfit) maxProfit = e - minPrice;
+    })
+    return maxProfit
+};
+console.log(maxProfit([7,1,5,3,6,4]));
+    </script>
+</body>
+</html>

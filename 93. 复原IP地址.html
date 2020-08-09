@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var restoreIpAddresses = function(s) {
+    var arr = [],
+        tmp;
+    // s = s.split('');
+    // s.slice();
+    let p = 0;
+    for(let q = 0; q < s.length; q++) {
+        tmp = Number(s.slice(p,q));
+        if(  tmp >=0 && tmp <= 255 ){
+            
+        }
+    }
+
+    console.log(s);
+};
+
+        console.log(restoreIpAddresses("25525511135"));
+    </script>
+</body>
+</html>

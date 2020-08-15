@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight = function(n) {
+    var ans  = 0;
+    debugger;
+    while(n) {
+        ans ++;
+        n = n & (n-1)
+    }
+    return ans;
+};
+console.log(hammingWeight(00000000000000000000000000001011));
+    </script>
+</body>
+</html>

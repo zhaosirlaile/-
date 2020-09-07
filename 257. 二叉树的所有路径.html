@@ -28,17 +28,28 @@ root.left = new TreeNode(2);
 root.left.right = new TreeNode(5)
 root.right = new TreeNode(3);
 var binaryTreePaths = function(root) {
-    console.log(root.val);
-    var str = '';
-    if(root.left) {
-        binaryTreePaths(root.left);
+    if(root === null) {
+        return []
     }
-    if(root.right) {
-        binaryTreePaths(root.right);
+    const res = []
+    const buildPath = (root, pathStr) => {
+        if(root.left === null && root.right === null) {
+            pathStr += root.val
+            res.push(pathStr)
+            return;
+        }
+        pathStr += root.val + '->';
+        if(root.left) {
+            buildPath(root.left, pathStr)
+        }
+        if(root.right){
+            buildPath(root.right,pathStr)
+        }
     }
+    buildPath(root,'')
+    return res;
 };
-binaryTreePaths(root);
-// console.log(binaryTreePaths([3,2,3]))
+console.log(binaryTreePaths(root))
 </script>
 </body>
 </html>

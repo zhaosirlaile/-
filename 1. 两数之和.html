@@ -14,8 +14,11 @@
  * @param {number} target
  * @return {number[]}
  */
+
+ // 第一种方法
  var twoSum = function(nums, target) {
     let i = nums.length;
+    debugger;
     while(i > 1) {
         let last = nums.pop();
         if (nums.indexOf(target - last) > -1) {
@@ -24,6 +27,23 @@
         i--
     } 
 };
+
+
+// 第二种方法 hashMap
+const twoSum2 = (nums, target) => {
+    let curNum,targeNum,tagetIndex;
+    for(let i = 0; i < nums.length; i++) {
+        curNum = nums[i];
+        targeNum = target - curNum;
+        tagetIndex = nums.indexOf(targeNum);
+        debugger;
+        if(tagetIndex >= 0 && i !== tagetIndex) {
+            return [i , tagetIndex]
+        }
+    }
+}
+
+console.log(twoSum2([3,2,4],6))
     </script>
 </body>
 </html>

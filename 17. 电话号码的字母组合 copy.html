@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+// 算法1 递归数 dfs
+var letterCombinations = function(digits) {
+    const res = [];
+    if(digits.length === 0) return res;
+    const map = { 
+        '2': 'abc', 
+        '3': 'def', 
+        '4': 'ghi', 
+        '5': 'jkl', 
+        '6': 'mno', 
+        '7': 'pqrs', 
+        '8': 'tuv', 
+        '9': 'wxyz', 
+    };
+
+    const dfs =  (curStr, i) => {
+        if(i > digits.length - 1) {
+            res.push(curStr);
+            return;
+        }
+        const dop = map[digits[i]];
+        for(const l of dop) {
+            dfs(curStr + l, i + 1);
+        }
+    }
+    dfs('',0);
+    return res;
+    
+};
+console.log(letterCombinations('23'));
+    </script>
+</body>
+</html>

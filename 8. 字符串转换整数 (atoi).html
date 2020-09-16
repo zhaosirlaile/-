@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+    str = str.trim();
+    function normalNumber(strNum) {
+        for(let i = 0; i< strNum.length; i++) {
+            if(!(strNum[i] >= '0' && strNum[i] <= '9')) {
+                return strNum.slice(0,i);
+            }
+        }
+        return Number(strNum);
+    }
+    function panduanNumberSize(num){
+        debugger;
+        const INT_MIN = Math.pow(-2,31),
+            INT_MAX = Math.pow(2,31) - 1;
+        if(num < INT_MIN) {
+            return INT_MIN
+        } else if (num > INT_MAX){
+            return INT_MAX;
+        } else {
+            return num
+        }
+    }
+    const startStr = str[0];
+    switch(true) {
+        case startStr === '+':
+            return panduanNumberSize(normalNumber(str.slice(1)))
+            break;
+        case startStr === '-':
+            return panduanNumberSize(- normalNumber(str.slice(1)))
+            break;
+        case startStr >= '0' && startStr <= '9':
+            return panduanNumberSize(normalNumber(str));
+            break;
+        default: 
+            return 0;
+    }
+};
+console.log(myAtoi('42'));
+    </script>
+</body>
+</html>

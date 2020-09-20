@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {string}
+ */
+var reverseStr = function(s, k) {
+    const k2 = 2 * k;
+    let k2yu = 0,
+        res = '',
+        temp = '';
+    for(let i = 0 ; i < s.length ; i++) {
+        k2yu = i % k2;
+        if(k2yu === 0) {
+            res = res + temp;
+            temp = "";
+        }
+        if(k2yu < k) {
+            temp =  s[i] + temp;
+        } else {
+            temp = temp + s[i];
+        }
+    }
+    return temp.length ?res + temp : res  ;
+};
+console.log(reverseStr("abcdefg",2));
+    </script>
+</body>
+</html>

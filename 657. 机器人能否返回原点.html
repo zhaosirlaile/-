@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} moves
+ * @return {boolean}
+ */
+var judgeCircle = function(moves) {
+    const postion = [0,0];
+    for(let i of moves) {
+        switch (i) {
+            case 'U':
+                postion[0] ++;
+                // postion()
+                break;
+            case 'D':
+                postion[0] --;
+                break;
+            case 'L':
+                postion[1] --;
+                break;
+            case 'R':
+                postion[1] ++;
+                break;
+        }
+    }
+    return postion[0] === 0 && postion[1] === 0
+};
+console.log(judgeCircle("LL"));
+    </script>
+</body>
+</html>

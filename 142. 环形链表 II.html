@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var detectCycle = function(head) {
+    var set = new Set();
+    while(head) {
+        if(set.has(head)) {
+            return head;
+        }
+        set.add(head);
+        head = head.next;
+    }
+    return null;
+};
+var root = new ListNode(3);
+root.next = new ListNode(2);
+root.next.next = new ListNode(0);
+root.next.next.next = new ListNode(-4);
+root.next.next.next.next = root.next;
+
+console.log(hasCycle(root))
+    </script>
+</body>
+</html>

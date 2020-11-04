@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+var lowestCommonAncestor = function(root, p, q) {
+    const set = new Set();
+    let result = null,flag = 0;
+    function commenParent (node,targetNode) {
+        if(node === null) return false;
+        if(node !== targetNode) {
+            var LBool = RBoll = false;
+            LBool = commenParent(node.left,targetNode)
+            RBoll = commenParent(node.right,targetNode)
+            if(LBool || RBoll) {
+                if(set.has(node) && flag === 0) {
+                    result = node;
+                    flag ++;
+                }
+                set.add(node);
+            }
+            return LBool || RBoll;
+        } else {
+            if(set.has(node) && flag === 0) {
+                result = node;
+                flag ++;
+            }
+            set.add(node);
+            return true;
+        }
+    }
+    commenParent(root,p);
+    commenParent(root,q);
+    return result;
+};
+// var root = new TreeNode(3);
+// root.left = new TreeNode(5);
+// root.right = new TreeNode(1);
+// var q = root.left.left = new TreeNode(6)
+// root.left.right = new TreeNode(2)
+// var p = root.left.right.left = new TreeNode(7)
+// root.left.right.right = new TreeNode(4)
+// root.right.left = new TreeNode(0)
+// root.right.right = new TreeNode(8)
+var root = q =  new TreeNode(1);
+p = root.right = new TreeNode(2);
+debugger;
+console.log(lowestCommonAncestor(root,p,q));
+
+
+    </script>
+</body>
+</html>

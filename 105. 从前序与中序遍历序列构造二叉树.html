@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+  function TreeNode(val) {
+      this.val = val;
+      this.left = this.right = null;
+  }
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} inorder
+ * @param {number[]} postorder
+ * @return {TreeNode}
+ */
+var buildTree = function(preorder, inorder) {
+    const map = {};
+    for(let i = 0; i < inorder.length; i++) {
+        map[inorder[i]] = i;
+    }
+    const helper = (preStart, preEnd, inStart, inEnd) => {
+        if(preStart > preEnd || inStart > inEnd) {
+            return null;
+        }
+        // 找到根节点
+        const rooVal = preorder[preStart];
+        // 找到根节点在 preorder 中的下标
+        const mid = map[rooVal]
+        const leftNodeNum = mid - inStart;
+
+        const root = new TreeNode(rooVal);
+        root.left = helper(preStart + 1, preStart + leftNodeNum , inStart, mid - 1);
+        root.right = helper(preStart + leftNodeNum + 1, preEnd, mid + 1, inEnd);
+        return root;
+    }
+    return helper(0,preorder.length - 1, 0 , inorder.length - 1);
+};
+console.log(buildTree([3,9,20,15,7],[9,3,15,20,7]));
+    </script>
+</body>
+</html>

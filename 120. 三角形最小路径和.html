@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[][]} triangle
+ * @return {number}
+ */
+// 用来动态规划
+var minimumTotal = function(triangle) {
+    const height = triangle.length;
+    const width = triangle[0].length;
+    // 初始化dp数组
+    const dp = new Array(height);
+    for (let i = 0; i < height; i++) {
+        dp[i] = new Array(width);
+    }
+    debugger;
+    for (let i = height - 1; i >= 0; i--) {
+        for (let j = triangle[i].length - 1; j >= 0; j--) {
+        if (i == height - 1) {  
+            // base case
+            dp[i][j] = triangle[i][j];  
+        } else {
+            // 状态转移方程
+            dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+        }
+        }
+    }
+    return dp[0][0];
+};
+console.log(minimumTotal(
+    [
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+));
+    </script>
+</body>
+</html>

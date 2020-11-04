@@ -22,17 +22,13 @@
 var maxDepth = function(root) {
     var LD = 0,
         RD = 0;
-    if(!root) return 0;
-    if(root.left) {
+    if(!root) {
+        return 0
+    } else {
         LD = maxDepth(root.left)
-    }
-    if(root.right) {
         RD = maxDepth(root.right)
+        return Math.max(LD,RD)+ 1;
     }
-    if(!root.left && !root.right){
-        return 1;
-    }
-    return (LD > RD ? LD : RD) + 1;
 };
         console.log(maxDepth([0],0,[1],1));
     </script>

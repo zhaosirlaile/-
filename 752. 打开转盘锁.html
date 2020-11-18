@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string[]} deadends
+ * @param {string} target
+ * @return {number}
+ */
+var plusOne = (s,j) => {
+    var str = s.split('');
+    if(str[j] === '9'){
+        str[j] = '0'
+    } else {
+        str[j] = (parseInt(str[j]) + 1 ) + '';
+    }
+    return str.join('');
+}
+var minusOne = (s,j) => {
+    var str = s.split('');
+    if(str[j] === '0'){
+        str[j] = '9'
+    } else {
+        str[j] = (parseInt(str[j]) - 1 ) + '';
+    }
+    return str.join('');
+}
+var openLock = function(deadends, target) {
+    const queue = [],
+        deadSet = new Set(deadends),
+        visited = new Set();
+    let depth = 0;
+    queue.push('0000');
+    visited.add('0000');
+    while(queue.length) {
+        var len = queue.length;
+        for(let i = 0; i < len; i++) {
+            let cur = queue.shift();
+            if(deadSet.has(cur)) {
+                continue;
+            }
+            if(cur === target) {
+                return depth;
+            }
+            for(let j = 0; j < 4; j++) {
+                let up = plusOne(cur,j);
+                let down = minusOne(cur,j);
+                if(!visited.has(up)) {
+                    queue.push(up);
+                    visited.add(up);
+                }
+                if(!visited.has(down)) {
+                    queue.push(down);
+                    visited.add(down);
+                }
+            }
+        }
+        depth++;
+    }
+    return -1;
+};
+
+console.log(openLock(["0201","0101","0102","1212","2002"],"0202"));
+    </script>
+</body>
+</html>

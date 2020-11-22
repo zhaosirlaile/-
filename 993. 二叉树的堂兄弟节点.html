@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}        
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} x
+ * @param {number} y
+ * @return {boolean}
+ */
+var isCousins = function(root, x, y) {
+    const [xDepth,xParent] = judgement(root,x)
+    const [yDepth,yParent] = judgement(root,y)
+    // console.log(xDepth,xParent)
+    // console.log(yDepth,yParent)
+    // console.log(xParent === yParent);
+    if(xDepth === yDepth && xParent.val !== yParent.val) {
+        return true
+    } else {
+        return false;
+    }
+};
+var judgement = (root, val) =>{
+    const queue = [];
+    let depth = 0;
+    queue.push(root);
+    while(queue.length) {
+        let len = queue.length;
+        for(let i = 0 ; i < len; i++) {
+            const cur = queue.shift();
+            if(cur.val === val) return [depth,cur.parent]
+            cur.left && queue.push({...cur.left,parent: cur});
+            cur.right && queue.push({...cur.right,parent: cur});
+        }
+        depth ++;
+    }
+}
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.right.left = new TreeNode(4);
+root.right.right = new TreeNode(5);
+console.log(isCousins(
+    root,
+    4,
+    5
+));
+
+
+    </script>
+</body>
+</html>

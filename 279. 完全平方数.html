@@ -13,9 +13,29 @@
  * @return {number}
  */
 var numSquares = function(n) {
-
+    const queue = [];
+    const visited = new Set();
+    queue.push(0);
+    visited.add(0);
+    let depth = 0;
+    while(queue.length) {
+        depth ++;
+        let len = queue.length;
+        for(let i = 0; i < len; i++) {
+            let cur = queue.shift();
+            for(let j = 1; j * j + cur <= n; j++) {
+                let next = j * j + cur;
+                if(next === n) return depth; 
+                if(next < n && !visited.has(next)) {
+                    queue.push(next);
+                    visited.add(next);
+                }
+            }
+        }
+    }
+    return distance;
 };
-console.log(deserialize(serialize(root)));
+console.log(numSquares(12));
 </script>
 </body>
 </html>

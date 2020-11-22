@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+/**
+ * @param {string} beginWord
+ * @param {string} endWord
+ * @param {string[]} wordList
+ * @return {number}
+ */
+var ladderLength = function(beginWord, endWord, wordList) {
+    const queue = [];
+    let depth = 1;
+    queue.push(beginWord);
+    while(queue.length) {
+        let len = queue.length; 
+        for(let i = 0; i < len ; i ++) {
+            let cur = queue.shift();
+            if(cur === endWord) return depth;
+            for(let j = 0; j < wordList.length ; j++) {
+                if(judgment(cur,wordList[j])) {
+                    queue.push(wordList[j]);
+                    wordList.splice(j,1);
+                    j --;
+                }
+            }
+        }
+        depth ++;
+    }
+    return 0;
+};
+
+const judgment = (a,b) => {
+    var len = a.length;
+    var count = 0;
+    for(let i = 0 ; i < len; i++){
+        if(a.charAt(i) !== b.charAt(i)) {
+            count ++;
+        }
+    }
+    return count === 1 ? true : false;
+}
+
+console.log(ladderLength("hit", 'cog', ["hot","dot","dog","lot","log","cog"]));
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function Node(val, neighbors) {
+    this.val = val === undefined ? 0 : val;
+    this.neighbors = neighbors === undefined ? [] : neighbors;
+};
+/**
+ * // Definition for a Node.
+ * function Node(val, neighbors) {
+ *    this.val = val === undefined ? 0 : val;
+ *    this.neighbors = neighbors === undefined ? [] : neighbors;
+ * };
+ */
+
+/**
+ * @param {Node} node
+ * @return {Node}
+ */
+var cloneGraph = function(node) {
+    if (node == null) return null;
+    const queue = [];
+    const resulst = [];
+    const visitedSet = new Set([node]);
+    const resultObj = {};
+    queue.push(node);
+    while(queue.length) {
+        let len = queue.length;
+        for(let i = 0; i < len ; i++ ){
+            let cur = queue.shift(),
+                curNeightbors = cur.neighbors;
+            for(let j = 0; j < curNeightbors.length; j++ ){
+                let tempNode = curNeightbors[j];
+                if(!visitedSet.has(tempNode)) {
+                    visitedSet.add(tempNode);
+                    queue.push(tempNode);
+                }
+            }
+        }
+    }
+    visitedSet.forEach(item => {
+        resultObj[item.val] = item;
+    })
+    for(let index in resultObj) {
+        resulst.push(new Node(resultObj[index].val))
+    }
+    resulst.map(item => {
+        const objNei = resultObj[item.val].neighbors;
+        objNei.forEach(x => {
+            item.neighbors.push(resulst[x.val - 1]);
+        })
+        return item;
+    })
+    return resulst[0];
+};
+const leftTop = new Node(1),
+    rightTop  = new Node(2),
+    bottomLeft = new Node(4),
+    bottomRight = new Node(3);
+leftTop.neighbors = [rightTop,bottomLeft];
+rightTop.neighbors = [leftTop,bottomRight]; 
+bottomLeft.neighbors = [leftTop,bottomRight]; 
+bottomRight.neighbors = [rightTop,bottomLeft]; 
+console.log(cloneGraph(leftTop));
+    </script>
+</body>
+</html>

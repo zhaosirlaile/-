@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var rightSideView = function(root) {
+    if(!root) return [];
+    const queue = [];
+    queue.push(root);
+    const reuslt = [];
+    while(queue.length) {
+        let len = queue.length;
+        let cur = null;
+        for(let i = 0; i < len ;i ++) {
+            cur = queue.shift();
+            cur.left && queue.push(cur.left);
+            cur.right && queue.push(cur.right);
+        }
+        reuslt.push(cur.val);
+    }
+    return reuslt;
+};
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+// root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+
+// root.right.left = new TreeNode(5);
+root.right.right = new TreeNode(4);
+// root.right.left.left = new TreeNode(7);
+
+console.log(rightSideView(root));
+
+
+    </script>
+</body>
+</html>

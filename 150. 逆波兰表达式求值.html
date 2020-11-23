@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string[]} tokens
+ * @return {number}
+ */
+var evalRPN = function(tokens) {
+    const stack = [];
+    debugger;
+    tokens.forEach(item => {
+        if(item.length === 1 && item.match(/\W/)){
+            const b = stack.pop(),
+                a = stack.pop();
+            stack.push(parseInt(eval(`${a} ${item} ${b}`)));
+        } else {
+            stack.push(item);
+        }
+    })
+    return stack[0]
+};
+console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]));
+    </script>
+</body>
+</html>

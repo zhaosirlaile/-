@@ -12,18 +12,35 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+
+// 第一种
+//  var removeDuplicates = function(nums) {
+//     let index = 0
+//     for( let i=0,len=nums.length; i<len; i++ ){
+//         if( nums[i] != nums[i+1] ) {
+//             nums[index] = nums[i]
+//             index++
+//         }
+//     }
+//     nums.length = index;
+//     return index
+// };
+
+// 第二种
+
  var removeDuplicates = function(nums) {
-    let index = 0
-    for( let i=0,len=nums.length; i<len; i++ ){
-        if( nums[i] != nums[i+1] ) {
-            nums[index] = nums[i]
-            index++
+    let p = 0; q = 1;
+    while(q < nums.length) {
+        if(nums[p] !== nums[q]) {
+            p ++;
+            nums[p] = nums[q]
         }
+        q ++;
     }
-    nums.length = index;
-    return index
+    return p + 1;
 };
-let y = removeDuplicates([0,0,1,1,1,2,2,3,3,4]);
+let y = removeDuplicates([1,1,2]);
 console.log(y);
 
     </script>

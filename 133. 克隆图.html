@@ -20,46 +20,98 @@ function Node(val, neighbors) {
  * };
  */
 
+function Node(val, neighbors) {
+   this.val = val === undefined ? 0 : val;
+   this.neighbors = neighbors === undefined ? [] : neighbors;
+};
 /**
  * @param {Node} node
  * @return {Node}
  */
+
+// 我做的第一种方法
+// var cloneGraph = function(node) {
+//     if (node == null) return null;
+//     const queue = [];
+//     const resulst = [];
+//     const visitedSet = new Set([node]);
+//     const resultObj = {};
+//     queue.push(node);
+//     while(queue.length) {
+//         let len = queue.length;
+//         for(let i = 0; i < len ; i++ ){
+//             let cur = queue.shift(),
+//                 curNeightbors = cur.neighbors;
+//             for(let j = 0; j < curNeightbors.length; j++ ){
+//                 let tempNode = curNeightbors[j];
+//                 if(!visitedSet.has(tempNode)) {
+//                     visitedSet.add(tempNode);
+//                     queue.push(tempNode);
+//                 }
+//             }
+//         }
+//     }
+//     visitedSet.forEach(item => {
+//         resultObj[item.val] = item;
+//     })
+//     for(let index in resultObj) {
+//         resulst.push(new Node(resultObj[index].val))
+//     }
+//     resulst.map(item => {
+//         const objNei = resultObj[item.val].neighbors;
+//         objNei.forEach(x => {
+//             item.neighbors.push(resulst[x.val - 1]);
+//         })
+//         return item;
+//     })
+//     return resulst[0];
+// };
+
+// 第二种 dfs
+// var cloneGraph = function(node) {
+//     const visitedMap = new Map();
+//     var dfs = (node) => {
+//         if(node === null)  return null;
+//         if(visitedMap.has(node.val)) return visitedMap.get(node.val);
+
+//         const clonedNode = new Node(node.val,[]);
+//         visitedMap.set(node.val, clonedNode);
+
+//         for(const neighborNode of node.neighbors) {
+//             const clonedNeightborNode = dfs(neighborNode);
+//             clonedNode.neighbors.push(clonedNeightborNode);
+
+//         }
+//         return clonedNode
+//     }
+//     return dfs(node);
+// }
+
+// 第三种 bfs
 var cloneGraph = function(node) {
-    if (node == null) return null;
-    const queue = [];
-    const resulst = [];
-    const visitedSet = new Set([node]);
-    const resultObj = {};
-    queue.push(node);
-    while(queue.length) {
-        let len = queue.length;
-        for(let i = 0; i < len ; i++ ){
-            let cur = queue.shift(),
-                curNeightbors = cur.neighbors;
-            for(let j = 0; j < curNeightbors.length; j++ ){
-                let tempNode = curNeightbors[j];
-                if(!visitedSet.has(tempNode)) {
-                    visitedSet.add(tempNode);
-                    queue.push(tempNode);
+    const visitedMap = new Map();
+    var bfs = (node) => {
+        if(node === null)  return null;
+        const queue = [],
+            clone = new Node(node.val);
+        visitedMap.set(node.val,clone); 
+        queue.push(node);
+
+        while(queue.length) {
+            let cur = queue.pop();
+            for(let neighbor of cur.neighbors) {
+                if(!visitedMap.has(neighbor.val)) {
+                    visitedMap.set(neighbor.val,new Node(neighbor.val))
+                    queue.push(neighbor);
                 }
+                visitedMap.get(cur.val).neighbors.push(visitedMap.get(neighbor.val));
             }
         }
+        return clone
     }
-    visitedSet.forEach(item => {
-        resultObj[item.val] = item;
-    })
-    for(let index in resultObj) {
-        resulst.push(new Node(resultObj[index].val))
-    }
-    resulst.map(item => {
-        const objNei = resultObj[item.val].neighbors;
-        objNei.forEach(x => {
-            item.neighbors.push(resulst[x.val - 1]);
-        })
-        return item;
-    })
-    return resulst[0];
-};
+    return bfs(node);
+}
+
 const leftTop = new Node(1),
     rightTop  = new Node(2),
     bottomLeft = new Node(4),

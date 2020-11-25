@@ -25,25 +25,42 @@ function TreeNode(val, left, right) {
  * @param {TreeNode} root
  * @return {number[]}
  */
-var postorderTraversal = function(root) {
-    let arr = [];
 
-    function postOrder (node) {
-        if(!node) return ;
+// 方法一：隐式栈 递归
+// var inorderTraversal = function(root) {
+//     let arr = [];
+
+//     function inOrder (node) {
+//         if(!node) return ;
         
-        postOrder(node.left);
-        postOrder(node.right);
-        arr.push(node.val);
-    }
-    postOrder(root);
-    return arr;
-};
+//         inOrder(node.left);
+//         arr.push(node.val);
+//         inOrder(node.right);
+//     }
+//     inOrder(root);
+//     return arr;
+// };
 let root = new TreeNode(1);
 root.right = new TreeNode(2);
 root.right.left = new TreeNode(3);
 
+// 方法二：显示栈 stack
+var inorderTraversal = function(root) {
+    const res = [];
+    const stack = [];
+    while(root || stack.length) {
+        while(root) {
+            stack.push(root);
+            root = root.left
+        }
+        root = stack.pop();
+        res.push(root.val);
+        root = root.right;
+    }
+    return res;
+};
 
-console.log(postorderTraversal(root))
+console.log(inorderTraversal(root))
 
 
     </script>

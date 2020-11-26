@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} s
+ * @return {string}
+ */
+// 方法一：显示栈
+// var decodeString = function(s) {
+//     const s1 = [],
+//         s2 = [];
+//     let temp = '';
+//     for(let i = 0; i < s.length; i++) {
+//         if(s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+//             temp = temp + s.charAt(i);
+//             if(!(s.charAt(i + 1) >= '0' && s.charAt(i+1) <= '9')) {
+//                 s1.push(temp);
+//             }
+//             continue;
+//         } 
+//         temp = s.charAt(i);        
+//         if (temp === ']') {
+//             debugger;
+//             const repeatNum = parseInt(s1.pop());
+//             let str = '';
+//             temp = ''
+//             while(temp !== '[') {
+//                 str = temp + str;
+//                 temp = s2.pop();
+//             }
+//             s2.push(str.repeat(repeatNum));
+//         } else {
+//             s2.push(temp);
+//         }
+//         temp = '';
+//     }
+//     return s2.join('');
+// };
+
+// 方法一：显示栈 别人写的
+// var decodeString = function(s) {
+//     let res = '';
+//     let multi = 0;
+//     const stack_multi = [];
+//     const stack_res = [];
+//     for(let char of s) {
+//         if(char === '[') {
+//             stack_multi.push(multi);
+//             stack_res.push(res);
+//             multi = 0;
+//             res =  '';
+//         }else if (char === ']') {
+//             res = stack_res.pop() + res.repeat(stack_multi.pop());
+//         } else if (char >= '0' && char <= '9') {
+//             multi = multi * 10 + parseInt(char);
+//         } else {
+//             res = res + char;
+//         }
+//     }
+//     return res;
+// };
+
+console.log(decodeString("100[zhaosir]"));
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[][]} image
+ * @param {number} sr
+ * @param {number} sc
+ * @param {number} newColor
+ * @return {number[][]}
+ */
+var floodFill = function(image, sr, sc, newColor) {
+    const y = image.length,
+        x = image[0].length,
+        startColor = image[sr][sc];
+        debugger;
+    const dfs = (sr,sc) => {
+        if(sr >= 0 && sr < y && sc >=0 && sc < x) {
+            if(image[sr][sc] === startColor && image[sr][sc] !== newColor) {
+                image[sr][sc] = newColor;
+                dfs(sr + 1, sc);
+                dfs(sr - 1, sc);
+                dfs(sr , sc + 1);
+                dfs(sr , sc - 1);
+            }
+        }
+    }
+    dfs(sr,sc);
+    return image
+};
+
+console.log(floodFill(
+
+    [[0,0,0],[0,0,0]],
+0,
+0,
+2,
+));
+[
+    [2,2,2],
+    [2,2,0],
+    [2,0,1]
+]
+    </script>
+</body>
+</html>

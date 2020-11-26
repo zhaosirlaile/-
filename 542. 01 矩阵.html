@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[][]} matrix
+ * @return {number[][]}
+ */
+var updateMatrix = function(matrix) {
+    // const queue = [];
+    const queue = [];
+    const visitedSet = new Set();
+    const y = matrix.length,
+        x = matrix[0].length;
+    for(let i = 0; i < y; i++) {
+        for (let j = 0; j < x; j++) {
+            if(matrix[i][j] === 0) {
+                queue.push([i,j]);
+            } else {
+                matrix[i][j] = -1;
+            }
+        }
+    }
+    let dx = [-1,1,0,0],
+        dy = [0,0,-1,1];
+        debugger;
+    while(queue.length) {
+        let cur = queue.shift();
+        let r = cur[0],
+            c = cur[1];
+        for(let i = 0; i < 4; i++) {
+            let newY = dy[i] + r,
+                newX = dx[i] + c;
+            if(newX >= 0 && newX < x && newY >= 0 && newY < y && matrix[newY][newX] === -1){
+                if(visitedSet.has(`${newY},${newX}`)) continue;
+                matrix[newY][newX]  = matrix[r][c] + 1;
+                queue.push([newY,newX]);
+                visitedSet.add(`${newY},${newX}`)
+            }
+        }
+    }
+    return matrix;
+};
+console.log(updateMatrix(
+    [[0,0,0],
+ [0,1,0],
+ [1,1,1]]
+));
+    </script>
+</body>
+</html>

@@ -15,6 +15,7 @@
 var maxProfit = function(prices) {
     var result = 0;
     for(let i = 0; i < prices.length - 1; i++) {
+        debugger;
         result += Math.max(0 , prices[i+1] - prices[i]);
     }
     return result;

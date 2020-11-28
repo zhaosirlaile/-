@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+var rotate = function(matrix) {
+  const len = matrix.length -1
+  const visitedSet = new Set();
+  let temp = null;
+  for(let i = 0; i < len; i++) {
+    for(let j = 0; j < len; j++) {
+      if(visitedSet.has(`${i},${j}`)) continue;
+      temp = matrix[i][j];
+      matrix[i][j] = matrix[len - j][i];
+      matrix[len - j][i] = matrix[len - i][len - j];
+      matrix[len - i][len - j] = matrix[j][len - i];
+      matrix[j][len - i] = temp;
+      visitedSet.add(`${i},${j}`)
+      visitedSet.add(`${len - j},${i}`)
+      visitedSet.add(`${len - i},${len - j}`)
+      visitedSet.add(`${j},${len - i}`)
+    }
+  }
+  console.log(matrix);
+};
+rotate(
+  [
+    [5,1,9,11],
+    [2,4,8,10],
+    [13,3,6,7],
+    [15,14,12,16]
+  ]
+)
+
+</script>
+</body>
+</html>

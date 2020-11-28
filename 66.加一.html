@@ -17,17 +17,17 @@
             digits[digits.length - 1] ++;
             for(var i = digits.length-1; i >= 0; i--) {
                 if(digits[i]> 9 && i>0) {
-                    console.log(digits);
                     digits[i-1] ++;
                     digits[i] = digits[i] % 10; 
                 }
             }
+            debugger;
             if(digits[0] > 9) {
                 digits.unshift(1);
                 digits[1] = digits[1] % 10; 
             }
         };
-        console.log(plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]));
+        console.log(plusOne([9]));
     </script>
 </body>
 </html>

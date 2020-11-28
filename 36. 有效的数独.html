@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+// 方法一： 暴力破解
+// var isValidSudoku = function(board) {
+//     let jugement = (x,y) =>{
+//         const target = board[y][x];
+//         let res = true;
+//         board[y].forEach((item,index) => {
+//             if(item === target && index !== x) {
+//                 res = false
+//                 return res;
+//             }
+//         })
+//         for(let i = 0 ; i < 9; i++) {
+//             if(board[i][x] === target && i !== y) {
+//                 res = false;
+//                 return res;
+//             }
+//         }
+//         const gradx0 = parseInt(x / 3) * 3,
+//             gradx1 = gradx0 + 2,
+//             grady0 = parseInt(y / 3) * 3,
+//             grady1 = grady0 + 2;
+//         for(let i = grady0 ; i <= grady1 ; i++ ) {
+//             for(let j = gradx0 ; j <= gradx1 ; j++ ) {
+//                 if(board[i][j] === target && i !== y && j !== x) {
+//                     res = false;
+//                     return res;                
+//                 }
+//             }
+//         }
+//         return res;
+//     }
+
+//     for(let i = 0; i < 9; i++) {
+//         for(j = 0; j <9; j++) {
+//             if(board[i][j] === '.') continue;
+//             if(!jugement(j,i)) {
+//                 return false;
+//             }
+//         }
+//     }
+//     return true
+// };
+
+
+// 方法二： hashmap
+const isValidSudoku = (board) => {
+  // 步骤 1：初始化横、纵以及小九宫格
+  const rows = [],
+    columns = [],
+    boxes = [];
+  for (let i = 0; i < 9; i++) {
+    rows[i] = [];
+    columns[i] = [];
+    boxes[i] = [];
+  }
+  // 对应的 rows 为 [[], [], [], [], [], [], [], [], []]
+  
+  // 步骤 2：遍历填充值
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+
+      // 获取值
+      const value = board[i][j];
+
+      // 先判断非 . 元素
+      if (value !== '.') {
+
+        // 检验横排
+        if (!rows[i].includes(value)) {
+          rows[i].push(value);
+        } else {
+          return false;
+        }
+
+        // 检验竖排
+        if (!columns[j].includes(value)) {
+          columns[j].push(value);
+        } else {
+          return false;
+        }
+
+        // 检查盒子
+        const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3); // 对应的盒子
+        if (!boxes[boxIndex].includes(value)) {
+          boxes[boxIndex].push(value);
+        } else {
+          return false;
+        }
+      }
+    }
+  }
+
+  // 步骤 3：如果没有问题，就是真的，返回 true
+  return true;
+};
+
+console.log(isValidSudoku(
+    [
+        ["5","3",".",".","7",".",".",".","."],
+        ["6",".",".","1","9","5",".",".","."],
+        [".","9","8",".",".",".",".","6","."],
+        ["8",".",".",".","6",".",".",".","3"],
+        ["4",".",".","8",".","3",".",".","1"],
+        ["7",".",".",".","2",".",".",".","6"],
+        [".","6",".",".",".",".","2","8","."],
+        [".",".",".","4","1","9",".",".","5"],
+        [".",".",".",".","8",".",".","7","9"]
+    ]
+))
+
+    </script>
+</body>
+</html>

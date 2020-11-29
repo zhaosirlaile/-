@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function(s) {
+    var map = {};
+    for(char of s) {
+        if(map[char]) {
+            map[char] =  map[char] + 1;
+        } else {
+            map[char] = 1;
+        }
+    }
+    for(let i = 0; i < s.length; i++) {
+        if(map[s.charAt(i)] === 1) {
+            return i;
+        }
+    }
+    return -1;
+};
+console.log(firstUniqChar("leetcode"));
+</script>
+</body>
+</html>

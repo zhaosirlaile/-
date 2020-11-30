@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} node
+ * @return {void} Do not return anything, modify node in-place instead.
+ */
+ var head = new ListNode(4)
+head.next = new ListNode(5);
+head.next.next = new ListNode(1);
+head.next.next.next = new ListNode(9);
+
+var deleteNode = function(node) {
+    node.val = node.next.val, node.next = node.next.next
+};
+
+
+
+    </script>
+</body>
+</html>

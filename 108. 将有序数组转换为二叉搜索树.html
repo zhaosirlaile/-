@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} nums
+ * @return {TreeNode}
+ */
+const dfs = (nums, lo , hi) => {
+    if(lo > hi) return null;
+    let mid = Math.round(lo + (hi - lo) / 2);
+    const root = new TreeNode(nums[mid]);
+    root.left = dfs(nums, lo, mid-1);
+    root.right = dfs(nums, mid + 1, hi);
+    return root
+}
+var sortedArrayToBST = function(nums) {
+    return dfs(nums, 0, nums.length - 1);
+};
+// debugger;
+console.log(sortedArrayToBST([-10,-3,0,5,9]))
+
+
+    </script>
+</body>
+</html>

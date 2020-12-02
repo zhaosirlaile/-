@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for isBadVersion()
+ * 
+ * @param {integer} version number
+ * @return {boolean} whether the version is bad
+ * isBadVersion = function(version) {
+ *     ...
+ * };
+ */
+
+/**
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function(isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function(n) {
+        let flag = false,
+            jurden = 0;
+        while(n >= 1 ) {
+            jurden = isBadVersion(n);
+            if( jurden === true) {
+                flag = true;
+            } else if(flag === true && jurden === false) {
+                return n + 1;
+            }
+            n --;
+        }
+        return 1;
+    };
+};
+</script>
+</body>
+</html>

@@ -12,15 +12,25 @@
  * @param {character[]} s
  * @return {void} Do not return anything, modify s in-place instead.
  */
+// var reverseString = function(s) {
+//     let len = parseInt(s.length / 2),
+//         temp = null;
+//     for(let i = 0 ; i < len ; i ++) {
+//         temp = s[i];
+//         s[i] = s[s.length - 1 - i];
+//         s[s.length - 1 - i] = temp;
+//     }
+//     console.log(s);
+// };
+
 var reverseString = function(s) {
-    let len = parseInt(s.length / 2),
-        temp = null;
-    for(let i = 0 ; i < len ; i ++) {
-        temp = s[i];
-        s[i] = s[s.length - 1 - i];
-        s[s.length - 1 - i] = temp;
+    convert = (left,right) => {
+        if(left>= right) return
+        [s[left], s[right]] = [s[right], s[left]]
+        convert(left+1,right-1)
     }
-    console.log(s);
+    convert(0,s.length-1)
+    return s
 };
 console.log(reverseString(["h","e","l","l","o"]));
     </script>

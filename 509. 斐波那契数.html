@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} N
+ * @return {number}
+ */
+//  方法二：加上 Map
+var fib = function(N) {
+    const map =  new Map();
+    const recursion = (n) => {
+        if(map.has(n)) return map.get(n);
+        if(n < 2) {
+            map.set(n,n);
+            return n;
+        } else {
+            const res = recursion(n-1) + recursion(n-2);
+            map.set(n,res);
+            return res;
+        }
+    }
+    return recursion(N);
+};
+
+// 方法一： 普通的
+// var fib = function(N) {
+//     if(N < 2) {
+//         return N
+//     } else {
+//         return fib(N-1) + fib(N-2);
+//     }
+// };
+console.log(fib(10));
+
+
+    </script>
+</body>
+</html>

@@ -23,18 +23,29 @@ function ListNode(val) {
  * @param {ListNode} head
  * @return {ListNode}
  */
+//  方法一：迭代
+// var reverseList = function(head) {
+//     if(!head) return head 
+//     var p = head,
+//         q = p.next,
+//         temp = null;
+//         p.next = null;
+//     while(q) {
+//         temp = q.next;
+//         q.next = p;
+//         p = q;
+//         q = temp;
+//     }
+//     return p;
+// };
+
+// 方法二：递归
 var reverseList = function(head) {
-    if(!head) return head 
-    var p = head,
-        q = p.next,
-        temp = null;
-        p.next = null;
-    while(q) {
-        temp = q.next;
-        q.next = p;
-        p = q;
-        q = temp;
-    }
+    debugger;
+    if(head === null || head.next === null ) return head;
+    let p = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
     return p;
 };
 

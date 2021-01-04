@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+/**
+ * @param {number[]} nums
+ */
+var Solution = function(nums) {
+    this.nums = nums;
+};
+
+/**
+ * Resets the array to its original configuration and return it.
+ * @return {number[]}
+ */
+Solution.prototype.reset = function() {
+    return this.nums
+};
+
+/**
+ * Returns a random shuffling of the array.
+ * @return {number[]}
+ */
+Solution.prototype.shuffle = function() {
+    const nums = this.nums.slice(0);
+    const len = nums.length;
+    for(let i = 0; i < len; i++ ) {
+        const rand = Math.floor(Math.random()*(len-i) + i);
+        [nums[i], nums[rand]] = [nums[rand], nums[i]];
+    }
+    return nums;
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * var obj = new Solution(nums)
+ * var param_1 = obj.reset()
+ * var param_2 = obj.shuffle()
+ */
+var obj = new Solution([1, 2, 3])
+// obj.reset();
+// console.log(firstUniqChar("leetcode"));
+</script>
+</body>
+</html>

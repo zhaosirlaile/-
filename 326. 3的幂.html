@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfThree = function(n) {
+    if(n === 1) return true;
+    while(n > 3) {
+        n /= 3;
+    }
+    return n === 3;
+};
+
+console.log(isPowerOfThree(27));
+    </script>
+</body>
+</html>

@@ -43,6 +43,21 @@ const twoSum2 = (nums, target) => {
     }
 }
 
+// 第三种方法 字典
+
+var twoSum = function(nums, target) {
+    const map = new Map();
+    for(let i = 0 ; i < nums.length; i +=1) {
+        const n = nums[i];
+        const n2 = target - n;
+        if(map.has(n2)) {
+            return [map.get(n2),i];
+        } else {
+            map.set(n,i);
+        }
+    }
+};
+
 console.log(twoSum2([3,2,4],6))
     </script>
 </body>

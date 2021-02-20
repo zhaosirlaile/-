@@ -19,17 +19,32 @@
  * @param {TreeNode} root
  * @return {number}
  */
+//  方法一
+// var maxDepth = function(root) {
+//     var LD = 0,
+//         RD = 0;
+//     if(!root) {
+//         return 0
+//     } else {
+//         LD = maxDepth(root.left)
+//         RD = maxDepth(root.right)
+//         return Math.max(LD,RD)+ 1;
+//     }
+// };
+//  方法二
+
 var maxDepth = function(root) {
-    var LD = 0,
-        RD = 0;
-    if(!root) {
-        return 0
-    } else {
-        LD = maxDepth(root.left)
-        RD = maxDepth(root.right)
-        return Math.max(LD,RD)+ 1;
+    let res = 0;
+    const dfs = (n,l) => {
+        if(!n) return;
+        if(!n.left && !n.right) res = Math.max(res,l);
+        res = Math.max(res,l);
+        dfs(n.left, l + 1);
+        dfs(n.right, l + 1);
     }
-};
+    dfs(root,1);
+    return res;
+}
         console.log(maxDepth([0],0,[1],1));
     </script>
 </body>

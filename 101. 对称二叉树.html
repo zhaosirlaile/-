@@ -24,18 +24,20 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
- var isSymmetric = function(root) {
-    if(!root) return true
-    var isEqual = function (left, right) {
-        if(!left && !right) return true;
-        if(!left || !right) return false;
+// 原来写的,分而治之
+//  var isSymmetric = function(root) {
+//     if(!root) return true
+//     var isEqual = function (left, right) {
+//         if(!left && !right) return true;
+//         if(!left || !right) return false;
 
-        return left.val === right.val && isEqual(left.left,right.right) && isEqual(left.right,right.left);
+//         return left.val === right.val && isEqual(left.left,right.right) && isEqual(left.right,right.left);
 
-    }
+//     }
 
-    return isEqual(root.left,root.right);
-};
+//     return isEqual(root.left,root.right);
+// };
+
 var p = new TreeNode(1),
     q = new TreeNode(1);
 p.left = new TreeNode(2);

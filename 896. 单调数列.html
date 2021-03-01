@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} A
+ * @return {boolean}
+ */
+var isMonotonic = function(A) {
+    const recA = () => {
+        for(let i = 0; i < A.length - 1; i ++) {
+            if(A[i] > A[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    const recB = () => {
+        for(let i = 0; i < A.length - 1; i ++) {
+            if(A[i] < A[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    return recA() || recB();
+};
+    </script>
+</body>
+</html>

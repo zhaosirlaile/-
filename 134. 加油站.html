@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
+var canCompleteCircuit = function(gas, cost) {
+    let capacity = 0;
+    for(let i = 0 ; i < gas.length; i ++ ) {
+        if( gas[i] - cost[i] >= 0) {
+            let j = i;
+            capacity = gas[i];
+            const subIndex = (i - 1) < 0 ? (i - 1) + gas.length : i - 1;
+            debugger;
+            while(capacity > 0) {
+                capacity = capacity - cost[j]
+                if(subIndex === j) {
+                    if(capacity >= 0) return i;
+                }
+                if(capacity > 0 ) {
+                    capacity = capacity + gas[(j + 1) % gas.length];
+                } else {
+                    break;
+                }
+                if(j === gas.length - 1) {
+                    j = 0;
+                } else {
+                    j ++;
+                }
+            }
+        } else {
+            continue;
+        }
+    }
+    return -1;
+};
+const gas  = [2],
+      cost = [2];
+console.log(canCompleteCircuit(gas,cost));
+    </script>
+</body>
+</html>

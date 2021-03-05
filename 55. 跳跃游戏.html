@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+
+// 自己的犯法，超时
+// var canJump = function(nums) {
+
+//     const rec = (start) => {
+//         if(start === nums.length - 1) {
+//             return true;
+//         } else if (start >= nums.length) {
+//             return false;
+//         }
+//         const target = nums[start];
+//         let res = false;
+//         for(let i = 1; i <= target; i++) {
+//             res = res || rec(start + i)
+//         }
+//         return res;
+//     }
+//     return rec(0);
+// };    
+
+var canJump = function(nums) {
+    let k = 0;
+    for(let i = 0; i < nums.length ; i++) {
+        if(i > k) return false;
+        k = Math.max(k , i + nums[i]);
+    }
+    return true;
+};   
+
+console.log(canJump([0,1]))
+</script>
+</body>
+</html>

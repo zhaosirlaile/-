@@ -22,6 +22,7 @@ var minWindow = function(s, t) {
     }
     let needType = need.size;
     let res = '';
+    debugger;
     while(r < s.length) {
         const c = s[r];
         if(need.has(c)) {
@@ -43,7 +44,7 @@ var minWindow = function(s, t) {
     }
     return res;
 };
-
+console.log(minWindow('ADOBECODEBANC','ABC'));
     </script>
 </body>
 </html>

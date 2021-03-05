@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+
+// 溢出
+// var maxSlidingWindow = function(nums, k) {
+//     const res = [];
+//     let left = 0,
+//         len = nums.length;
+//     const maxValue = (start) => {
+//         let max = nums[start];
+//         for(let i = 1; i < k; i++) {
+//             if(max < nums[i + start]) {
+//                 max = nums[i + start];
+//             }
+//         }
+//         return max;
+//     }
+//     while(left + k <= len) {
+//         res.push(maxValue(left));
+//         left ++;
+//     }
+
+//     return res;
+// };
+
+// 加一个栈
+var maxSlidingWindow = function(nums, k) {
+    if(nums === null || nums.length < 2) return nums;
+    const res = [],stack = [];
+    debugger;
+    for(let i = 0 ; i < nums.length; i++) {
+        while(stack.length && stack[0] <= nums[i]) {
+            stack.shift();
+        }
+        stack.push(nums[i]);
+        if(i + 1 >= k) {
+            res.push(stack[0]);
+        }
+    }
+    return res;
+};
+console.log(maxSlidingWindow([1,-1],1))
+    </script>
+</body>
+</html>

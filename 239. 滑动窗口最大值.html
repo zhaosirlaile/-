@@ -38,20 +38,42 @@
 
 // 加一个栈
 var maxSlidingWindow = function(nums, k) {
-    if(nums === null || nums.length < 2) return nums;
-    const res = [],stack = [];
-    debugger;
-    for(let i = 0 ; i < nums.length; i++) {
-        while(stack.length && stack[0] <= nums[i]) {
-            stack.shift();
+    let n = nums.length;
+    class slideWindow{
+        constructor(){
+            this.data = [];
         }
-        stack.push(nums[i]);
-        if(i + 1 >= k) {
-            res.push(stack[0]);
+        push(val){
+            let data = this.data;
+            while(data.length > 0 && data[data.length - 1] < val){
+                data.pop();
+            }
+            data.push(val);
+        }
+        pop(val){
+            let data = this.data;
+            if(data.length > 0 && data[0] === val){
+                data.shift();
+            }
+        }
+        max(){
+            return this.data[0];
+        }
+    }
+    let res = [];
+    let windows = new slideWindow();
+    for(let i = 0;i < n;i++){
+        if(i < k - 1){
+            windows.push(nums[i]);
+        }else{
+            windows.push(nums[i]);
+            res.push(windows.max());
+            windows.pop(nums[i - k + 1]);
         }
     }
     return res;
 };
+
 console.log(maxSlidingWindow([1,-1],1))
     </script>
 </body>

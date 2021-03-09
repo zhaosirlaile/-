@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+// 递归
+// var PredictTheWinner = function(nums) {
+//     const helper = (i,j) => {
+//         if(i === j) return nums[i];
+//         const pickI = nums[i] - helper(i + 1,j);
+//         const pickJ = nums[j] - helper(i, j -1);
+//         return Math.max(pickI,pickJ);
+//     }
+//     return helper(0,nums.length - 1) >= 0;
+// };
+
+// 记忆化递归
+// var PredictTheWinner = function(nums) {
+//     const len = nums.length;
+//     const memo = new Array(len).fill(0).map(() => new Array(len));
+//     const helper = (i,j) => {
+//         if(i === j) return nums[i];
+//         if(memo[i][j]) {
+//             return memo[i][j];
+//         }
+//         const pickI = nums[i] - helper(i + 1,j);
+//         const pickJ = nums[j] - helper(i, j -1);
+//         memo[i][j] = Math.max(pickI,pickJ);
+//         return memo[i][j];
+//     }
+//     return helper(0,nums.length - 1) >= 0;
+// };
+
+// DP
+var PredictTheWinner = function(nums) {
+    const len = nums.length;
+    const dp = new Array(len).fill(0).map(() => new Array(len));
+    for(let i = 0; i < len ; i++) {
+        dp[i][i] = nums[i];
+    }
+    debugger;
+    for(let i = len - 2; i >= 0; i--) {
+        for(let j = i +1; j < len; j++) {
+            const pickI = nums[i] - dp[i + 1][j];
+            const pickJ = nums[j] - dp[i][j - 1];
+            dp[i][j] = Math.max(pickI,pickJ)
+        }
+    }
+    debugger;
+    return dp[0][len - 1] >= 0;
+};
+console.log(PredictTheWinner([1,5,233,7]))
+    </script>
+</body>
+</html>

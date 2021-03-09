@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} N
+ * @param {number} K
+ * @return {number}
+ */
+// 递归, 超时
+// var kthGrammar = function(N, K) {
+//     const helper = (n) => {
+//         if(n === 1) return '0'
+//         const subValue = helper(n-1);
+//         let lineStr = ''
+//         for(let value of subValue) {
+//             if(value === '0') {
+//                 lineStr = lineStr + '01'
+//             } else {
+//                 lineStr = lineStr + '10'
+//             }
+//         }
+//         return lineStr;
+//     }
+//     return helper(N).charAt(K-1);
+// };
+
+// 找的规律
+var kthGrammar = function(N, K) {
+    debugger;
+    if(N === 1 || N === 0) return 0;
+    let range = Math.pow(2, N-2);
+    if(K <= range) {
+        return kthGrammar(N-1,K);
+    } else {
+        return kthGrammar(N-1,K - range) === 1 ? 0 : 1
+    }
+
+};
+console.log(kthGrammar(4,5));
+    </script>
+</body>
+</html>

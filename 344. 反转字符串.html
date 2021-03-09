@@ -25,7 +25,7 @@
 
 var reverseString = function(s) {
     convert = (left,right) => {
-        if(left>= right) return
+        if(left >= right) return
         [s[left], s[right]] = [s[right], s[left]]
         convert(left+1,right-1)
     }

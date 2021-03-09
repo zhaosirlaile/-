@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+var getMinimumDifference = function(root) {
+    const res = [];
+    let min = null;
+    const helper = (node) => {
+        if(!node) return ;
+        helper(node.left);
+        res.push(node.val);
+        helper(node.right);
+    }
+    helper(root);
+    min = Math.abs(res[0] - res[1]);
+    for(let i = 1; i < res.length - 1; i++) {
+        const abs = Math.abs(res[i] - res[i +1]);
+        if(min > abs) min = abs;
+    }
+    return min;
+};
+
+let root = new TreeNode(543);
+root.left = new TreeNode(384);
+root.right = new TreeNode(652);
+root.left.right = new TreeNode(445);
+root.right.right = new TreeNode(699);
+getMinimumDifference(root);
+    </script>
+</body>
+</html>

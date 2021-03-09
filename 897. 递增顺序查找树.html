@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var increasingBST = function(root) {
+    const res = new TreeNode();
+    let q = res;
+    const helper = (node) => {
+        if(!node) return null;
+        helper(node.left);
+        q.right = node;
+        q = q.right;
+        q.left = null;
+        helper(node.right)
+    }
+    helper(root);
+    return res.right;
+};
+    </script>
+</body>
+</html>

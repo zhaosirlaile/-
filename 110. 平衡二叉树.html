@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+
+// 自顶向下（暴力法）
+// var isBalanced = function(root) {
+//     if (!root) return true;
+//     return Math.abs(helper(root.left) - helper(root.right)) <= 1
+//         && isBalanced(root.left)
+//         && isBalanced(root.right)
+// };
+// const helper = (node) => {
+//     if (!node) return -1;
+//     return 1 + Math.max(helper(node.left),helper(node.right))
+// }
+
+// 自底向上（优化
+var isBalanced = function (root) {
+    return balanced(root) !== -1
+};
+var balanced = function (node) {
+    if (!node) return 0
+    const left = balanced(node.left)
+    const right = balanced(node.right)
+    if (left === -1 || right === -1 || Math.abs(left - right) > 1) {
+        return -1
+    }
+    return Math.max(left, right) + 1
+}
+
+let root = new TreeNode(3,new TreeNode(9),new TreeNode(20,new TreeNode(15), new TreeNode(7)));
+isBalanced(root);
+    </script>
+</body>
+</html>

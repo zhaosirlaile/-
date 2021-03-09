@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+/**
+ * @param {TreeNode} original
+ * @param {TreeNode} cloned
+ * @param {TreeNode} target
+ * @return {TreeNode}
+ */
+
+var getTargetCopy = function(original, cloned, target) {
+    debugger;
+    const helper = (original,cloned) => {
+        if(!original) return null;
+        if(target === original) {
+            return cloned;
+        }
+        const left = helper(original.left,cloned.left);
+        if(left) return left
+        const right =  helper(original.right,cloned.right);
+        if(right) return right;
+    }
+    return helper(original,cloned);
+};
+const root = new TreeNode(7)
+root.left = new TreeNode(4)
+root.right = new TreeNode(3)
+root.right.left = new TreeNode(6)
+root.right.right = new TreeNode(19)
+
+const x = getTargetCopy(root,root,3)
+console.log(x);
+
+    </script>
+</body>
+</html>

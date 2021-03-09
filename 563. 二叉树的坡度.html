@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+var findTilt = function(root) {
+    let res = 0;
+    const helper = (node) => {
+        if(!node) return 0;
+        const left_sum = helper(node.left);
+        const right_sum = helper(node.right);
+        res += Math.abs(left_sum - right_sum);
+        return left_sum + right_sum + node.val;
+    };
+    helper(root);
+    return res;
+};
+const root = new TreeNode(4)
+root.left = new TreeNode(2)
+root.right = new TreeNode(9);
+root.left.left = new TreeNode(3);
+root.left.right = new TreeNode(5);
+root.right.right = new TreeNode(7);
+findTilt(root);
+    </script>
+</body>
+</html>

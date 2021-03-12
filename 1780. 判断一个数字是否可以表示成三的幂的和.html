@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var checkPowersOfThree = function(n) {
+
+    const helper = (y,x) => {
+        const mi = Math.pow(3,x);
+        if(mi < y) {
+            return helper(y-mi,x + 1) || helper(y,x + 1);
+        } else if (mi === y) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return helper(n,0);
+};
+checkPowersOfThree(21);
+
+    </script>
+</body>
+</html>

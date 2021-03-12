@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+
+ // dfs 没写完，大概会超时
+// var coinChange = function(coins, amount) {
+//     if(amount === 0 ) return 0;
+//     const len = coins.length;
+//     coins.sort((a,b) => b - a)
+//     const helper = (sum) => {
+//         coins.forEach((value,index,res) => {
+//             const remainder = sum - value;
+//             if(remainder > 0) {
+//                 res ++;
+//                 helper(remainder);
+//             } else if (remainder === 0) {
+//                 res ++;
+//                 return res;
+//             }
+//             debugger;
+//         })
+//     }
+//     return helper(amount,0);
+// };
+
+// dp
+var coinChange = function(coins, amount) {
+    const dp = new Array(amount + 1).fill(Infinity);
+    dp[0] = 0;
+    for(let i = 1; i <= amount; i ++) {
+        for(let coin of coins) {
+            if(i - coin >= 0) {
+                dp[i] = Math.min(dp[i],dp[i - coin] + 1)
+            }
+        }
+    }
+    return dp[amount] === Infinity ? -1 : dp[amount];
+};
+console.log(coinChange([186,419,83,408],
+6249));
+    </script>
+</body>
+</html>

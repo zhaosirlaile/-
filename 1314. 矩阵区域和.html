@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[][]} mat
+ * @param {number} K
+ * @return {number[][]}
+ */
+// 暴力破解
+var matrixBlockSum = function(mat, K) {
+    let m = mat.length, n = mat[0].length;
+    const answer = new Array(m)
+    const helper = (i,j) => {
+        let res = 0;
+        for(let r = i - K; r <= i + K; r++) {
+            if(r < 0 || r >= m) continue;
+            for(let c = j - K; c <= j + K; c++) {
+                if(c < 0 || c >= n) continue;
+                res += mat[r][c];
+            }
+        }
+        return res;
+    }
+    for(let i = 0; i < m; i++) {
+        const temp = [];
+        for(let j = 0; j < n; j++) {
+            temp.push(helper(i,j));
+        }
+        answer[i] = temp;
+    }
+    console.log(answer);
+    return answer;
+};
+
+matrixBlockSum(
+    [
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+    ],1);
+
+    [
+        [12,21,16],
+        [27,45,33],
+        [24,39,28]
+    ]
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+ var spiralOrder = function(matrix) {
+    let n = matrix.length;
+    if(n === 0) return matrix;
+    let m = matrix[0].length;
+    const res = [];
+    const circle = (rowLeft,rowRight,cowTop,cowBottom) => {
+      if(rowLeft > rowRight || cowTop > cowBottom) return;
+      for(let i = rowLeft ; i <= rowRight; i++) {
+        res.push(matrix[cowTop][i]);
+      }
+      for(let i = cowTop + 1; i <= cowBottom; i++) {
+        res.push(matrix[i][rowRight]);
+      }
+      if(cowBottom === cowTop) return;
+      for(let i = rowRight - 1; i >= rowLeft; i --) {
+        res.push(matrix[cowBottom][i]);
+      }
+      if(rowLeft === rowRight) return;
+      for(let i = cowBottom - 1; i > cowTop; i--) {
+        res.push(matrix[i][rowLeft])
+      }
+      circle(rowLeft + 1, rowRight - 1, cowTop + 1, cowBottom - 1);
+    }
+    circle(0,m-1,0,n-1);
+    return res;
+};
+console.log(spiralOrder([[1,2,3],[4,5,6],[7,8,9]]))
+    </script>
+</body>
+</html>

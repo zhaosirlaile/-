@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+
+// 暴力
+// var search = function(nums, target) {
+//   let count = 0;
+
+//   nums.forEach(item => {
+//     if(target === item) count ++;
+//   })
+//   return count;
+// };
+// 两端指针
+var search = function(nums, target) {
+  let left = 0, right = nums.length - 1;
+  while(nums[left] < target) left ++;
+  while(nums[right] > target) right --;  
+  return  right - left >= 0 ? right - left + 1 : 0
+};
+
+console.log(search([5,7,7,8,8,10],8))
+    </script>
+</body>
+</html>

@@ -13,24 +13,24 @@
  * @param {number} target
  * @return {number[]}
  */
- var twoSum = function(numbers, target) {
-    let left = 0; right = numbers.length-1;
-    while(left<right) {
-        let leftNum = numbers[left],
-            rightNum = numbers[right];
-        if(leftNum + rightNum > target) {
-            right --;
-        }
-        if(leftNum + rightNum < target) {
-            left ++;
-        } 
-        if(leftNum + rightNum === target) {
-            return [left+1,right+1]
-        }
-    }
-};
-let y = twoSum([2, 7, 11, 15],9);
-console.log(y);
+// 方法一：对撞指针
+//  var twoSum = function(numbers, target) {
+//     let left = 0; right = numbers.length-1;
+//     while(left<right) {
+//         let leftNum = numbers[left],
+//             rightNum = numbers[right];
+//         if(leftNum + rightNum > target) {
+//             right --;
+//         }
+//         if(leftNum + rightNum < target) {
+//             left ++;
+//         } 
+//         if(leftNum + rightNum === target) {
+//             return [left+1,right+1]
+//         }
+//     }
+// };
+// let y = twoSum([2, 7, 11, 15],9);
 
     </script>
 </body>

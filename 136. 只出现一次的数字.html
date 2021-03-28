@@ -14,13 +14,28 @@
  * @return {number}
  */
 var singleNumber = function(nums) {
-    var ans = 0;
-    for(let num of nums) {
-        ans = ans ^ num;
+    let k = 0;
+
+    nums.forEach(num => k = k ^num);
+
+    let mask = 1;
+    debugger;
+    while((k & mask) === 0) {
+        mask = mask * 2;
     }
-    return ans;
+    let a = 0;
+    let b = 0;
+    nums.forEach(num => {
+        if((num & mask) === 0) {
+            a ^= num;
+        } else {
+            b ^= num;
+        }
+    })
+    return [a,b]
+
 };
-console.log(singleNumber([2,2,1]));
+console.log(singleNumber([4,1,4,6]));
     </script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+// 记数排序
+// var sortColors = function(nums) {
+//     let j = 0;
+//     const arr = new Array(3).fill(0);
+//     nums.forEach(item => {
+//         arr[item] ++;
+//     })
+
+//     arr.forEach((item,index) => {
+//         for(let i = 0 ; i < item; i++) {
+//             nums[j] = index
+//             j++;
+//         }
+//     })
+// };
+
+// 三路快排
+const swap = (a,b) => {
+    let temp = a;
+    a = b;
+    temp = a;
+}
+var sortColors = function(nums) {
+    let temp = null
+    let zero = -1 // num[0...zero] === 0
+    let two = nums.length; // num[two...n-1] === 2
+    for(let i = 0; i < two;) {
+        if(nums[i] === 0) {
+            zero ++;
+            temp = nums[i];
+            nums[i] = nums[zero];
+            nums[zero] = temp;
+            i++;
+        } else if (nums[i] === 1) {
+            i++;
+        } else {
+            two--;
+            temp = nums[i];
+            nums[i] = nums[two];
+            nums[two] = temp;
+        }
+    }
+};
+console.log(sortColors([2,0,2,1,1,0]));
+    </script>
+</body>
+</html>

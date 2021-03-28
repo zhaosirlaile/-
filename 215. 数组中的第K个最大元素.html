@@ -68,16 +68,36 @@
  * @param {number} k
  * @return {number}
  */
+// 方法一：借助hash
+// var findKthLargest = function(nums, k) {
+//     const h = new MinHeap();
+//     nums.forEach(value => {
+//         h.insert(value)
+//         if(h.size() > k) {
+//             h.pop();
+//         }
+//     })
+//     return h.peek();
+// };
+// 方法二：快速排序
+const quickSort = (nums) => {
+  if(nums.length <= 1) return nums
+  const left = [],
+    right = [];
+  for(let i = 1; i < nums.length; i++) {
+    if(nums[i] <= nums[0]) {
+      left.push(nums[i])
+    } else {
+      right.push(nums[i])
+    }
+  }
+  return [...quickSort(left),nums[0],...quickSort(right)]
+}
 var findKthLargest = function(nums, k) {
-    const h = new MinHeap();
-    nums.forEach(value => {
-        h.insert(value)
-        if(h.size() > k) {
-            h.pop();
-        }
-    })
-    return h.peek();
+  const sortedArr = quickSort(nums);
+  return sortedArr[sortedArr.length - k];
 };
+console.log(quickSort([3,2,1,5,6,4]))
     </script>
 </body>
 </html>

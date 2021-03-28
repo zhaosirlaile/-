@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+// 方法一：对撞指针
+const isYuanyin = (char) => {
+    char = char.toLocaleLowerCase();
+    if(char === 'a' || char === 'e' || char === 'o' || char === 'u' || char === 'i') {
+        return true;
+    } else {
+        return false;
+    }
+}
+var reverseVowels = function(s) {
+    let left = 0,
+        right = s.length - 1,
+        temp = null;
+    s = s.split('');
+    while(left < right) {
+        while(!isYuanyin(s[left]) && left < right) {
+            left ++;
+        }
+        while(!isYuanyin(s[right]) && left < right) {
+            right --;
+        }
+        temp = s[left];
+        s[left] = s[right];
+        s[right] = temp
+        left ++;
+        right --;
+    }
+    return s.join('');
+};
+console.log(reverseVowels("aA"));
+    </script>
+</body>
+</html>

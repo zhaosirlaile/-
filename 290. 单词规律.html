@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} pattern
+ * @param {string} s
+ * @return {boolean}
+ */
+var wordPattern = function(pattern, s) {
+    const arr = s.split(' ')
+    let map = new Map();
+    if(arr.length !== pattern.length) return false;
+    for(let i = 0; i < arr.length; i ++) {
+        if(map.has(pattern[i])) {
+            if(map.get(pattern[i]) !== arr[i]) return false
+        } else {
+            map.set(pattern[i],arr[i]);
+        }
+    }
+    map = new Map();
+    for(let i = 0; i < arr.length; i ++) {
+        if(map.has(arr[i])) {
+            if(map.get(arr[i]) !== pattern[i]) return false
+        } else {
+            map.set(arr[i],pattern[i]);
+        }
+    }
+    return true;
+};
+console.log(wordPattern("jquery",
+"jquery"))
+    </script>
+</body>
+</html>

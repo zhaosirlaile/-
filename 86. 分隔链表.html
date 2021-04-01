@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} x
+ * @return {ListNode}
+ */
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+var partition = function(head, x) {
+    const less = new ListNode(-1);
+    const more = new ListNode(-1);
+
+    let p = less,
+        q = more;
+    while(head) {
+        if(head.val < x) {
+            p.next = head
+            p = p.next;
+        } else {
+            q.next = head;
+            q = q.next
+        }
+        head = head.next;
+    }
+    p.next = more.next;
+    q.next = null;
+    return less.next;
+};
+var root = new ListNode(1);
+root.next = new ListNode(4);
+root.next.next = new ListNode(3);
+root.next.next.next = new ListNode(2);
+root.next.next.next.next = new ListNode(5);
+root.next.next.next.next.next = new ListNode(2);
+
+console.log(partition(root,3));
+    </script>
+</body>
+</html>

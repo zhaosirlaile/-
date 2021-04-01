@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var insertionSortList = function(head) {
+    if(!head) return head; 
+    const dummayHead = new ListNode(0);
+    dummayHead.next = head;
+    let lastSorted = head,
+        curr = head.next;
+    while(curr !== null) {
+        if(lastSorted.val <= curr.val) {
+            lastSorted = lastSorted.next;
+        } else {
+            let prev = dummayHead;
+            while(prev.next.val <= curr.val) {
+                prev = prev.next
+            }
+            lastSorted.next = curr.next;
+            curr.next = prev.next;
+            prev.next = curr;
+        }
+        curr = lastSorted.next;
+    }
+    return dummayHead.next;
+};
+    </script>
+</body>
+</html>

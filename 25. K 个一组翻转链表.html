@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} k
+ * @return {ListNode}
+ */
+// 方法一：利用堆栈
+var reverseKGroup = function(head, k) {
+    let q = head;
+    const stack = [];
+    const res = new ListNode(-1);
+    let p = res;
+    while(q) {
+        stack.push(q)
+        q = q.next
+        if(stack.length === k) {
+            while(stack.length) {
+                const node = stack.pop();
+                p.next = node;
+                p = p.next
+            }
+        } 
+    }
+    p.next = null;
+    while(stack.length) {
+        const node = stack.shift();
+        p.next = node;
+        p = p.next
+    }
+    p.next = null;
+    return res.next;
+};
+var node = new ListNode(1)
+node.next = new ListNode(2)
+// node.next.next = new ListNode(3)
+// node.next.next.next = new ListNode(4)
+// node.next.next.next.next = new ListNode(5)
+
+console.log(reverseKGroup(node,2));
+    </script>
+</body>
+</html>

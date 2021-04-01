@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} left
+ * @param {number} right
+ * @return {ListNode}
+ */
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+var reverseList = function(head) {
+    let pre = null,
+        cur = head,
+        next;
+    while(cur !== null) {
+        next = cur.next
+        cur.next = pre;
+        pre = cur;
+        cur = next;
+    }
+    return pre
+};
+var reverseBetween = function(head, left, right) {
+    const dummyNode = new ListNode(-1);
+    dummyNode.next = head;
+
+    let pre = dummyNode;
+
+    for (let i = 0; i < left - 1; i++) {
+        pre = pre.next;
+    }
+
+    let rightNode = pre;
+    for (let i = 0; i < right - left + 1; i++) {
+        rightNode = rightNode.next;
+    }
+
+    let leftNode = pre.next;
+    let curr = rightNode.next;
+
+    pre.next = null;
+    rightNode.next = null;
+
+    reverseList(leftNode);
+
+    pre.next = rightNode;
+    leftNode.next = curr;
+    return dummyNode.next;
+};
+const root = new ListNode(5);
+
+console.log(reverseBetween(root,1,1));
+
+    </script>
+</body>
+</html>

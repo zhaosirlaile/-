@@ -23,19 +23,36 @@ function ListNode(val, next) {
  * @param {ListNode} head
  * @return {ListNode}
  */
+// 方法一：递归
+// var swapPairs = function(head) {
+//     if(head === null) return null
+//     if(head.next) {
+//         let p = head,
+//             q = head.next,
+//             temp = q.next;
+//         q.next = p;
+//         p.next = swapPairs(temp);
+//         return q;
+//     }
+//     return head;
+// };
+// 普通方法：
 var swapPairs = function(head) {
-    if(head === null) return null
-    if(head.next) {
-        let p = head,
-            q = head.next,
-            temp = q.next;
-        q.next = p;
-        p.next = swapPairs(temp);
-        return q;
-    }
-    return head;
-};
+    const dummyHead = new ListNode(0);
+    dummyHead.next = head;
 
+    let p = dummyHead;
+    while(p.next && p.next.next) {
+        const node1 = p.next,
+            node2 = p.next.next,
+            next = node2.next;
+        node2.next = node1;
+        node1.next = next;
+        p.next = node2;
+        p = node1
+    }
+    return dummyHead.next
+}; 
 var node = new ListNode(1)
 node.next = new ListNode(2)
 node.next.next = new ListNode(3)

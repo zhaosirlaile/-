@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} target
+ * @param {number[]} nums
+ * @return {number}
+ */
+var minSubArrayLen = function(target, nums) {
+    let left = 0, right = -1;
+    let sum = 0;
+    let res = nums.length + 1;
+    while(left < nums.length) {
+        if(right + 1 < nums.length && sum < target) {
+            right ++;
+            sum += nums[right]
+        } else  {
+            sum -= nums[left]
+            left ++;
+        }
+        if(sum >= target) res = Math.min(res,right-left + 1);
+    }
+    if(res === nums.length + 1) {
+        return 0
+    } else {
+        return res;
+    }
+};
+    </script>
+</body>
+</html>

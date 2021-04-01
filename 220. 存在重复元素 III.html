@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @param {number} t
+ * @return {boolean}
+ */
+function getId(x,t) {
+    return Math.floor(x / (t + 1));
+}
+var containsNearbyAlmostDuplicate = function(nums, k, t) {
+    if(t < 0 ) return false;
+    const map = new Map();
+    for(let i = 0; i < nums.length ; i++) {
+        const m = getId(nums[i],t);
+        if(map.has(m)) {
+            return true;
+        } else if (map.has(m + 1) && Math.abs(map.get(m + 1) - nums[i]) <= t) {
+            return true;
+        } else if (map.has(m - 1) && Math.abs(map.get(m - 1) - nums[i]) <= t) {
+            return true;
+        }
+        map.set(m,nums[i]);
+        if(i >= k) {
+            map.delete(getId(nums[i-k],t))
+        }
+    }
+    return false;
+};
+console.log(containsNearbyAlmostDuplicate([1,5,9,1,5,9]
+,2,
+3))
+    </script>
+</body>
+</html>

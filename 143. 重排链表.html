@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {void} Do not return anything, modify head in-place instead.
+ */
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
+}
+var reorderList = function(head) {
+    const res = new ListNode(-1);
+    const stack = [];
+    let cur = head;
+    while(cur){
+        stack.push(cur);
+        cur = cur.next;
+    }
+    let q = res;
+    while(stack.length !== 0 && stack.length !== 1) {
+        const left = stack.shift();
+        const right = stack.pop();
+        q.next = left;
+        q = q.next;
+        q.next = right;
+        q = q.next;
+    }
+    if(stack.length === 1) {
+        q.next = stack[0]
+        q = q.next;
+    }
+    q.next = null;
+    return res.next;
+};
+const root = new ListNode(1)
+root.next = new ListNode(2);
+root.next.next = new ListNode(3);
+root.next.next.next = new ListNode(4);
+
+console.log(reorderList(root))
+
+
+    </script>
+</body>
+</html>

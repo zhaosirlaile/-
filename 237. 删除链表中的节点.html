@@ -29,7 +29,13 @@ head.next.next = new ListNode(1);
 head.next.next.next = new ListNode(9);
 
 var deleteNode = function(node) {
-    node.val = node.next.val, node.next = node.next.next
+    if(node === null) return;
+    if(node.next === null) {
+        node = null;
+        return;
+    }
+    node.val = node.next.val;
+    node.next = node.next.next;
 };
 
 

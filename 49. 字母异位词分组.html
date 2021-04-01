@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+/**
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+function common (str,map) {
+  let count = 0;
+  for(let char of str) {
+    if(map[char] && map[char] > 0){
+      map[char] = map[char] - 1;
+      count ++;
+    } else {
+      return false;
+    }
+  }
+  return count === str.length;
+}
+var groupAnagrams = function(strs) {
+  if(strs < 2) return [strs]
+  let map = {}
+  let arr = new Array(strs.length).fill(false);
+  const res = [];
+  for(let left = 0; left < strs.length; left++) {
+    if(arr[left]) continue;
+    const temp = [], leftStr = strs[left];
+    temp.push(leftStr)
+    arr[left] = true
+    map = {};
+    for(let char of strs[left]) {
+      map[char] = map[char] ? map[char] + 1: 1;
+    }
+    for(let right = left + 1; right < strs.length; right ++) {
+      const rightStr = strs[right]
+      if(arr[right] || leftStr.length !== rightStr.length) continue;
+      const myMap = Object.assign({},map)
+      if(common(rightStr,myMap)) {
+        arr[right] = true
+        temp.push(rightStr)
+      }
+    }
+    res.push(temp);
+  }
+  return res;
+};
+console.log(groupAnagrams( ["eat", "tea", "tan", "ate", "nat", "bat"]))
+</script>
+</body>
+</html>

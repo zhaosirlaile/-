@@ -14,25 +14,43 @@
  * @param {number} target
  * @return {number[][]}
  */
+// 方法一：
+// var combinationSum = function(candidates, target) {
+//     const ans = [];
+//     const dfs = (target,combine,idx) => {
+//         if(idx === candidates.length) {
+//             return;
+//         }
+//         if(target === 0) {
+//             ans.push(combine)
+//             return
+//         }
+//         dfs(target,combine,idx + 1);
+//         if(target - candidates[idx] >=0) {
+//             dfs(target-candidates[idx],[...combine,candidates[idx]],idx);
+//         }
+//     }
+//     dfs(target,[],0);
+//     return ans;
+// };
+
+// 方法二
 var combinationSum = function(candidates, target) {
-    const ans = [];
-    const dfs = (target,combine,idx) => {
-        if(idx === candidates.length) {
-            return;
-        }
-        if(target === 0) {
-            ans.push(combine)
-            return
-        }
-        dfs(target,combine,idx + 1);
-        if(target - candidates[idx] >=0) {
-            dfs(target-candidates[idx],[...combine,candidates[idx]],idx);
-        }
-    }
-    dfs(target,[],0);
-    return ans;
+    const res = []
+    helper(candidates,res,[],0,target,0);
+    return res;
 };
-        console.log(combinationSum([2,3,6,7],7));
+function helper (candidates,res,arr,sum,target,start) {
+    if(sum === target) {
+        res.push(arr);
+        return;
+    }
+    for(let i = start; i < candidates.length ; i++) {
+        if(candidates[i] + sum > target) continue;
+        helper(candidates,res,[...arr,candidates[i]],sum+candidates[i],target,i)
+    }
+}
+console.log(combinationSum([2],5));
     </script>
 </body>
 </html>

@@ -25,19 +25,33 @@ function TreeNode(val, left, right) {
  * @param {TreeNode} root
  * @return {number[]}
  */
-var preorderTraversal = function(root) {
-    let arr = [];
+// 递归实现：
+// var preorderTraversal = function(root) {
+//     let arr = [];
 
-    function preOrder (node) {
-        if(!node) return ;
+//     function preOrder (node) {
+//         if(!node) return ;
         
-        arr.push(node.val);
-        preOrder(node.left);
-        preOrder(node.right);
+//         arr.push(node.val);
+//         preOrder(node.left);
+//         preOrder(node.right);
+//     }
+//     preOrder(root);
+//     return arr;
+// };
+// 非递归实现：栈
+var preorderTraversal = function(root) {
+    let res;
+    if (!root) return res;
+    const stack = [root];
+    while(stack.length) {
+        const node = stack.pop();
+        console.log(node.val);
+        if(node.right) stack.push(node.right);
+        if(node.left) stack.push(node.left);
     }
-    preOrder(root);
-    return arr;
-};
+}
+
 let root = new TreeNode(1);
 root.right = new TreeNode(2);
 root.right.left = new TreeNode(3);

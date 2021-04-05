@@ -12,29 +12,37 @@
  * @param {number[][]} triangle
  * @return {number}
  */
-// 用来动态规划
+// 用来动态规划：自底向上
+// var minimumTotal = function(triangle) {
+//     const n = triangle.length;
+//     // 初始化dp数组
+//     const dp = new Array(n).fill(0).map(item => new Array(n).fill(0))
+//     debugger;
+//     for (let i = n - 1; i >= 0; i--) {
+//         for (let j = 0; j <= i; j++) {
+//             if (i == n - 1) {  
+//                 dp[i][j] = triangle[i][j];  
+//             } else {
+//                 dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+//             }
+//         }
+//     }
+//     return dp[0][0];
+// };
+// 递归 + 记忆化搜索
 var minimumTotal = function(triangle) {
-    const height = triangle.length;
-    const width = triangle[0].length;
-    // 初始化dp数组
-    const dp = new Array(height);
-    for (let i = 0; i < height; i++) {
-        dp[i] = new Array(width);
-    }
-    debugger;
-    for (let i = height - 1; i >= 0; i--) {
-        for (let j = triangle[i].length - 1; j >= 0; j--) {
-        if (i == height - 1) {  
-            // base case
-            dp[i][j] = triangle[i][j];  
-        } else {
-            // 状态转移方程
-            dp[i][j] = Math.min(dp[i + 1][j], dp[i + 1][j + 1]) + triangle[i][j];
+    const n = triangle.length;
+    const memo = new Array(n).fill(0).map(item => new Array(n).fill(0))
+    function helper(i,j) {
+        if(triangle.length === i) {
+            return 0;
         }
-        }
+        if(memo[i][j]) return memo[i][j]
+        return memo[i][j] = Math.min(helper(i+1,j), helper(i+1,j+1)) + triangle[i][j]
     }
-    return dp[0][0];
+    return helper(0,0);
 };
+
 console.log(minimumTotal(
     [
      [2],

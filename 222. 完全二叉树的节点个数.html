@@ -18,24 +18,25 @@
  */
 /**
  * @param {TreeNode} root
- * @return {TreeNode}
+ * @return {number}
  */
-// 方法一：
-// var invertTree = function(root) {
-//     if(!root) return null;
-//     return new TreeNode(
-//         root.val,
-//         invertTree(root.right),
-//         invertTree(root.left)
-//     );
-// };
-// 方法二：
-var invertTree = function(root) {
-    if(!root) return null;
-    root.left = invertTree(root.right)
-    root.right = invertTree(root.left)
-    return root;
+var countNodes = function(root) {
+    const queue = [root];
+    let res = 0;
+    while(queue.length) {
+        const len = queue.length;
+        for(let i = 0; i < len; i++) {
+            const cur = queue.shift();
+            res++;
+            if(cur.left) queue.push(cur.left)
+            if(cur.right) queue.push(cur.right)
+        }
+    }
+    return res;
 };
+console.log(countNodes([1,5,9,1,5,9]
+,2,
+3))
     </script>
 </body>
 </html>

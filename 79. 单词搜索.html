@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+var exist = function(board, word) {
+    const n = board.length,
+        m = board[0].length;
+    const visted = new Array(n).fill(false).map(item => new Array(m).fill(false))
+    
+    const d = [[-1,0],[0,1],[1,0],[0,-1]]
+    for(let i = 0; i < n; i++) {
+        for(let j = 0; j < m; j++) {
+            if(word[0] === board[i][j]) {
+                if(helper(i,j,0)) return true 
+            }
+        }
+    }
+    function isArea(x,y) {
+        return x >=0 && x <= n - 1 && y >=0 && y <= m - 1
+    }
+    function helper (i,j,index) {
+        if(index === word.length - 1) {
+            return board[i][j] === word[index]
+        };
+        if(board[i][j] === word[index]){
+            visted[i][j] = true;
+            for(let n = 0; n < 4; n++) {
+                let newx = i + d[n][0];
+                let newy = j + d[n][1];
+                if(isArea(newx,newy) && !visted[newx][newy] && helper(newx,newy,index + 1)) {
+                    return true;
+                }
+            }
+            visted[i][j] = false;
+        }
+        return false
+    }
+    return false;
+};
+
+
+
+console.log(exist([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+,"ABCCED"));
+
+    </script>
+</body>
+</html>

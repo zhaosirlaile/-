@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+var subsetsWithDup = function(nums) {
+    const res  = [];
+    nums.sort((a,b)=> a-b)
+    helper(res,nums,[],0)
+    return res;
+};
+function helper (res,nums,arr,start) {
+    res.push(arr);
+    for(let i = start; i < nums.length; i++) {
+        if(i- 1 >= start && nums[i] === nums[i-1]) continue
+        helper(res,nums,[...arr,nums[i]],i+1)
+    }
+}
+console.log(subsetsWithDup([4,4,4,1,4]));
+    </script>
+</body>
+</html>

@@ -25,48 +25,76 @@ function TreeNode(val) {
  * @param {TreeNode} q
  * @return {TreeNode}
  */
-var lowestCommonAncestor = function(root, p, q) {
-    const set = new Set();
-    let result = null,flag = 0;
-    function commenParent (node,targetNode) {
-        if(node === null) return false;
-        if(node !== targetNode) {
-            var LBool = RBoll = false;
-            LBool = commenParent(node.left,targetNode)
-            RBoll = commenParent(node.right,targetNode)
-            if(LBool || RBoll) {
-                if(set.has(node) && flag === 0) {
-                    result = node;
-                    flag ++;
-                }
-                set.add(node);
-            }
-            return LBool || RBoll;
-        } else {
-            if(set.has(node) && flag === 0) {
-                result = node;
-                flag ++;
-            }
-            set.add(node);
-            return true;
-        }
+// 以前的方法
+// var lowestCommonAncestor = function(root, p, q) {
+//     const set = new Set();
+//     let result = null,flag = 0;
+//     function commenParent (node,targetNode) {
+//         if(node === null) return false;
+//         if(node !== targetNode) {
+//             var LBool = RBoll = false;
+//             LBool = commenParent(node.left,targetNode)
+//             RBoll = commenParent(node.right,targetNode)
+//             if(LBool || RBoll) {
+//                 if(set.has(node) && flag === 0) {
+//                     result = node;
+//                     flag ++;
+//                 }
+//                 set.add(node);
+//             }
+//             return LBool || RBoll;
+//         } else {
+//             if(set.has(node) && flag === 0) {
+//                 result = node;
+//                 flag ++;
+//             }
+//             set.add(node);
+//             return true;
+//         }
+//     }
+//     commenParent(root,p);
+//     commenParent(root,q);
+//     return result;
+// };
+
+// 方法二
+var isExist = function(root,node) {
+    if(!root) return false;
+    if(root.val === node.val) return true;
+    return isExist(root.left,node) || isExist(root.right,node);
+}
+var isLeftOrRight = function(root,node) {
+    // 0 相等 , 1 在 左边，2 在右边
+    let res = 0;
+    if(!root) return res;
+    if(root.val === node.val) return res;
+    if(isExist(root.left,node)) {
+        res = 1;
+    } else {
+        res = 2;
     }
-    commenParent(root,p);
-    commenParent(root,q);
-    return result;
+    return res;
+}
+var lowestCommonAncestor = function(root, p, q) {
+    const pDot = isLeftOrRight(root,p);
+    const qDot = isLeftOrRight(root,q);
+    if(pDot === 1 && qDot === 1) {
+        return lowestCommonAncestor(root.left,p,q)
+    } else if (pDot === 2 && qDot === 2) {
+        return lowestCommonAncestor(root.right,p,q)
+    } else {
+        return root;
+    }
 };
-// var root = new TreeNode(3);
-// root.left = new TreeNode(5);
-// root.right = new TreeNode(1);
-// var q = root.left.left = new TreeNode(6)
-// root.left.right = new TreeNode(2)
-// var p = root.left.right.left = new TreeNode(7)
-// root.left.right.right = new TreeNode(4)
-// root.right.left = new TreeNode(0)
-// root.right.right = new TreeNode(8)
-var root = q =  new TreeNode(1);
-p = root.right = new TreeNode(2);
-debugger;
+var root = new TreeNode(3);
+var p = root.left = new TreeNode(5);
+root.right = new TreeNode(1);
+root.left.left = new TreeNode(6)
+root.left.right = new TreeNode(2)
+root.left.right.left = new TreeNode(7)
+var q = root.left.right.right = new TreeNode(4)
+root.right.left = new TreeNode(0)
+root.right.right = new TreeNode(8)
 console.log(lowestCommonAncestor(root,p,q));
 
 

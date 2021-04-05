@@ -18,23 +18,24 @@
  */
 /**
  * @param {TreeNode} root
- * @return {TreeNode}
+ * @param {number} sum
+ * @return {number}
  */
-// 方法一：
-// var invertTree = function(root) {
-//     if(!root) return null;
-//     return new TreeNode(
-//         root.val,
-//         invertTree(root.right),
-//         invertTree(root.left)
-//     );
-// };
-// 方法二：
-var invertTree = function(root) {
-    if(!root) return null;
-    root.left = invertTree(root.right)
-    root.right = invertTree(root.left)
-    return root;
+function findPath (node,num) {
+    let res = 0
+    if(!node) return res;
+    if(node.val === num)  res += 1;
+    res += findPath(node.left,num - node.val);
+    res += findPath(node.right,num - node.val);
+    return res;
+}
+var pathSum = function(root, sum) {
+    let res = 0;
+    if(!root) return res;
+    res += findPath(root,sum);
+    res += pathSum(root.left,sum);
+    res += pathSum(root.right,sum);
+    return res;
 };
     </script>
 </body>

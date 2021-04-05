@@ -13,9 +13,44 @@
  * @return {string[]}
  */
 // 算法1 递归数 dfs
-var letterCombinations = function(digits) {
+const map = { 
+    '2': 'abc', 
+    '3': 'def', 
+    '4': 'ghi', 
+    '5': 'jkl', 
+    '6': 'mno', 
+    '7': 'pqrs', 
+    '8': 'tuv', 
+    '9': 'wxyz', 
+};
+// 方法一：
+// var letterCombinations = function(digits) {
+//     const res = [];
+//     if(digits.length === 0) return res;
+//     const dfs =  (curStr, i) => {
+//         if(i > digits.length - 1) {
+//             res.push(curStr);
+//             return;
+//         }
+//         const dop = map[digits[i]];
+//         for(const l of dop) {
+//             dfs(curStr + l, i + 1);
+//         }
+//     }
+//     dfs('',0);
+//     return res;
+    
+// };
+
+// 方法二：
+
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+ var letterCombinations = function(digits) {
     const res = [];
-    if(digits.length === 0) return res;
+    if(digits === '') return res;
     const map = { 
         '2': 'abc', 
         '3': 'def', 
@@ -26,21 +61,21 @@ var letterCombinations = function(digits) {
         '8': 'tuv', 
         '9': 'wxyz', 
     };
-
-    const dfs =  (curStr, i) => {
-        if(i > digits.length - 1) {
-            res.push(curStr);
+    var findCombination = function (digits,index,s,res) {
+        if(index == digits.length) {
+            res.push(s);
             return;
         }
-        const dop = map[digits[i]];
-        for(const l of dop) {
-            dfs(curStr + l, i + 1);
+        const c = digits[index];
+        const letters =  map[c];
+        for(let i = 0; i < letters.length; i++) {
+            findCombination(digits,index + 1, s + letters[i],res);
         }
     }
-    dfs('',0);
+    findCombination(digits,0,'',res);
+
     return res;
-    
-};
+}
 console.log(letterCombinations('23'));
     </script>
 </body>

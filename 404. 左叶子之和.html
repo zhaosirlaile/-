@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+function isLeadNode (node) {
+    return node.left === null && node.right === null;
+}
+var sumOfLeftLeaves = function(root) {
+    const dfs = (node) => {
+        let ans = 0;
+        if(node.left) {
+            ans += isLeadNode(node.left) ? node.left.val : dfs(node.left)
+        }
+        if(node.right && !isLeadNode(node.right)) {
+            ans += dfs(node.right)
+        }
+        return ans;
+    }
+    return root !== null ? dfs(root) : 0;
+
+};
+const root = new TreeNode(3);
+root.left = new TreeNode(9);
+root.right = new TreeNode(20);
+root.right.left = new TreeNode(15);
+root.right.right = new TreeNode(7);
+console.log(sumOfLeftLeaves(root));
+
+
+    </script>
+</body>
+</html>

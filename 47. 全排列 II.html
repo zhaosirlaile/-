@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permuteUnique = function(nums) {
+  const res = []
+  const isUse = new Array(nums.length).fill(false);
+  nums.sort((a,b) => a-b)
+  helper(nums,[],res,isUse);
+  return res;
+};
+function helper (nums,arr,res,use) {
+  if(nums.length === arr.length ) {
+    res.push(arr);
+    return;
+  }
+  for(let i = 0; i < nums.length;i++) {
+    if(use[i] || (i>0 && nums[i] === nums[i-1] && !use[i-1])) continue;
+    use[i] = true;
+    helper(nums,[...arr,nums[i]],res,use);
+    use[i] = false;
+  }
+}
+
+const x = permuteUnique([1,2,1]);
+console.log(x);
+</script>
+</body>
+</html>

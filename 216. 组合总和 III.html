@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} k
+ * @param {number} n
+ * @return {number[][]}
+ */
+var combinationSum3 = function(k, n) {
+    const res = [];
+    helper(k,n,res,[],0,1);
+    return res;
+};
+function helper(k,n,res,arr,sum,start) {
+    if(sum === n && k === arr.length) {
+        res.push(arr);
+        return;
+    }
+    for(let i = start; i <= 9; i++) {
+        if(sum + i > n || arr.length > k) continue;
+        helper(k,n,res,[...arr,i],sum+i,i+1);
+    } 
+}
+console.log(combinationSum3(3,7));
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+/**
+ * @param {number[]} candidates
+ * @param {number} target
+ * @return {number[][]}
+ */
+var combinationSum2 = function(candidates, target) {
+    const res = []
+    candidates.sort((a,b) => a-b)
+    helper(candidates,res,[],0,target,0);
+    return res;
+};
+function helper (candidates,res,arr,sum,target,start) {
+    if(sum === target) {
+        res.push(arr);
+        return;
+    }
+    for(let i = start; i < candidates.length ; i++) {
+        if(i - 1 >= start && candidates[i] === candidates[i-1]) {
+            continue
+        }
+        if(candidates[i] + sum > target) continue;
+        helper(candidates,res,[...arr,candidates[i]],sum+candidates[i],target,i+1)
+    }
+}
+
+console.log(combinationSum2([10,1,2,7,6,1,5],8));
+    </script>
+</body>
+</html>

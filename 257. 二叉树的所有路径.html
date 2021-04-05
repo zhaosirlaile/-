@@ -27,28 +27,48 @@ var root = new TreeNode(1);
 root.left = new TreeNode(2);
 root.left.right = new TreeNode(5)
 root.right = new TreeNode(3);
+// 方法一：
+// var binaryTreePaths = function(root) {
+//     if(root === null) {
+//         return []
+//     }
+//     const res = []
+//     const buildPath = (root, pathStr) => {
+//         if(root.left === null && root.right === null) {
+//             pathStr += root.val
+//             res.push(pathStr)
+//             return;
+//         }
+//         pathStr += root.val + '->';
+//         if(root.left) {
+//             buildPath(root.left, pathStr)
+//         }
+//         if(root.right){
+//             buildPath(root.right,pathStr)
+//         }
+//     }
+//     buildPath(root,'')
+//     return res;
+// };
+
+// 方法二
 var binaryTreePaths = function(root) {
-    if(root === null) {
-        return []
+    const res = [];
+    if(!root) return res;
+    if(!root.left && !root.right) {
+        res.push(root.val + '')
+        return res;
     }
-    const res = []
-    const buildPath = (root, pathStr) => {
-        if(root.left === null && root.right === null) {
-            pathStr += root.val
-            res.push(pathStr)
-            return;
-        }
-        pathStr += root.val + '->';
-        if(root.left) {
-            buildPath(root.left, pathStr)
-        }
-        if(root.right){
-            buildPath(root.right,pathStr)
-        }
+    const leftS = binaryTreePaths(root.left);
+    for(let i = 0; i < leftS.length; i++) {
+        res.push(root.val + '->' + leftS[i])
     }
-    buildPath(root,'')
+    const rightS = binaryTreePaths(root.left);
+    for(let i = 0; i < rightS.length; i++) {
+        res.push(root.val + '->' + rightS[i])
+    }
     return res;
-};
+}
 console.log(binaryTreePaths(root))
 </script>
 </body>

@@ -15,6 +15,7 @@
  * @param {string[]} wordList
  * @return {number}
  */
+// 方法一：
 var ladderLength = function(beginWord, endWord, wordList) {
     const queue = [];
     let depth = 1;
@@ -37,6 +38,28 @@ var ladderLength = function(beginWord, endWord, wordList) {
     return 0;
 };
 
+
+// 方法二：没有优化
+var ladderLength = function(beginWord, endWord, wordList) {
+    const visited = new Set();
+    const queue = [beginWord];
+    let depth = 1;
+    while(queue.length) {
+        let len = queue.length;
+        for(let i = 0; i < len; i++) {
+            const cur = queue.shift();
+            if(cur === endWord) return depth;
+            for(let j = 0; j < wordList.length; j++) {
+                if(visited.has(cur)) continue;
+                if(judgment(cur,wordList[j])){
+                    queue.push(wordList[j]);
+                }
+            }
+        }
+        depth++;
+    }
+    return 0;
+};
 const judgment = (a,b) => {
     var len = a.length;
     var count = 0;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+/**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+var exist = function(board, word) {
+
+    const m = board.length,
+        n = board[0].length,
+        len = word.length - 1,
+        memo = new Array(m).fill(false).map(item => new Array(n).fill(false))
+    const d = [[-1,0],[0,1],[1,0],[0,-1]]
+    function isArea(i,j) {
+        return i >=0 && i < m && j >=0 && j < n;
+    }
+    function dfs(i,j,index) {
+        memo[i][j] = true;
+        if(board[i][j] === word[index]) {
+            if(index === len) return true;
+            for(let dis of d) {
+                const newX = i + dis[0],
+                    newY = j + dis[1];
+                if(isArea(newX,newY) && !memo[newX][newY]  && dfs(newX,newY,index + 1)) {
+                    return true;
+                }
+            }
+            memo[i][j] = false;
+            return false
+        } else {
+            memo[i][j] = false;
+            return false;
+        }
+    }
+    for(let i = 0; i < m; i++) {
+        for(let j = 0; j < n ;j++) {
+            if(board[i][j] === word[0] && dfs(i,j,0)) {
+                return true
+            }
+        }
+    }
+    return false;
+};
+const board = [["a","b"],["c","d"]]
+const word = "abcd"
+console.log(exist(board,word));
+</script>
+</body>
+</html>

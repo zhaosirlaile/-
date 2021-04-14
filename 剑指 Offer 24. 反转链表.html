@@ -15,22 +15,19 @@
  *     this.next = null;
  * }
  */
-
 /**
- * @param {ListNode} headA
- * @param {ListNode} headB
+ * @param {ListNode} head
  * @return {ListNode}
  */
-var getIntersectionNode = function(headA, headB) {
-    if(!headA || !headB) return null;
-
-    let pA = headA,
-        pB = headB;
-    while(pA !== pB) {
-        pA = pA === null ? headA : pA.next;
-        pB = pB === null ? headB : pB.next;
+ var reverseList = function(head) {
+    let cur = null,pre = head;
+    while(pre) {
+        const t = pre.next;
+        pre.next = cur;
+        cur = pre;
+        pre = t;
     }
-    return pA;
+    return cur;
 };
     </script>
 </body>

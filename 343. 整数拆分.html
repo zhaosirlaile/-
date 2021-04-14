@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number} n
+ * @return {number}
+ */
+
+// 递归 + 记忆化搜索
+function breakInteger (n,memo) {
+    debugger;
+    if(n === 1) return 1;
+    if(memo[n] !== -1) {
+        return memo[n]
+    }
+    let res = -1;
+    for(let i = 1; i <= n-1; i++) {
+        res = Math.max(res, i * (n-i) ,i * breakInteger(n-i,memo));
+    }
+    memo[n] = res;
+    return res;
+}
+var integerBreak = function(n) {
+
+    const memo = new Array(n+1).fill(-1)
+    return breakInteger(n,memo)
+};
+
+// 动态规划 + 自底向上
+// var integerBreak = function(n) {
+//     const memo = new Array(n+1).fill(-1);
+//     memo[1] = 1;
+//     for(let i = 2; i <= n; i++) {
+//         for(let j = 1; j <= i-1; j ++) {
+//             memo[i] = Math.max(memo[i], j * (i-j), j * memo[i-j])
+//         }
+//     }
+//     return memo[n]
+// };
+console.log(integerBreak(4));
+    </script>
+</body>
+</html>

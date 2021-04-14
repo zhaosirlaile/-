@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} target
+ * @return {number[][]}
+ */
+var pathSum = function(root, target) {
+    const res = [];
+    function dfs(node,rest,temp){
+        if(!node.left && !node.right && rest === node.val) {
+            res.push([...temp])
+        }
+        temp.push(node.val)
+        if(node.left) {
+            dfs(node.left,rest-node.val,temp);
+        }
+        if(node.right) {
+            dfs(node.right,rest-node.val,temp);
+        }
+        temp.pop()
+    }
+    dfs(root,target,[]);
+    return res;
+};
+    </script>
+</body>
+</html>

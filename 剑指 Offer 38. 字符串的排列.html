@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {string} s
+ * @return {string[]}
+ */
+var permutation = function(s) {
+  const res = new Set()
+  const visit = {}
+  function dfs(path) {
+      if(path.length === s.length) return res.add(path)
+      for (let i = 0; i < s.length; i++) {
+          if (visit[i]) continue
+          visit[i] = true
+          dfs(path + s[i])
+          visit[i] = false
+      }
+  }
+  dfs('')
+  return [...res]
+};
+console.log(permutation("abc"));
+    </script>
+</body>
+</html>

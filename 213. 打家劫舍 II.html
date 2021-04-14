@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var rob = function(nums) {
+    let n = nums.length;
+    if(!n) return 0;
+    if(n === 1) return nums[0];
+
+    let arr1 = nums.slice(0,n-1);
+    let arr2 = nums.slice(1);
+    return Math.max(max(arr1),max(arr2));
+};
+
+function max(nums){
+    let pre=0,cur=0,tmp;
+    for(let i=0;i<nums.length;i++){
+        tmp = cur;
+        cur = Math.max(pre+nums[i],cur);
+        pre = tmp;
+    }
+    return cur;
+}
+
+
+
+    </script> 
+</body>
+</html>

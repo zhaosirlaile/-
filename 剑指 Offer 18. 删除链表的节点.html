@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <script>
+<script>
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -15,23 +15,25 @@
  *     this.next = null;
  * }
  */
-
 /**
- * @param {ListNode} headA
- * @param {ListNode} headB
+ * @param {ListNode} head
+ * @param {number} val
  * @return {ListNode}
  */
-var getIntersectionNode = function(headA, headB) {
-    if(!headA || !headB) return null;
-
-    let pA = headA,
-        pB = headB;
-    while(pA !== pB) {
-        pA = pA === null ? headA : pA.next;
-        pB = pB === null ? headB : pB.next;
+ var deleteNode = function(head, val) {
+    const p = new ListNode(-1)
+    p.next = head;
+    let l = p,
+        j = head;
+    while(j && j.val !== val) {
+        l = l.next;
+        j = j.next;
     }
-    return pA;
+    if(j) {
+        l.next = j.next;
+    }
+    return p.next;
 };
-    </script>
+</script>
 </body>
 </html>

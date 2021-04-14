@@ -12,29 +12,54 @@
  * @param {number} n
  * @return {number}
  */
+// 方法一：
+// var numSquares = function(n) {
+//     const queue = [];
+//     const visited = new Set();
+//     queue.push(0);
+//     visited.add(0);
+//     let depth = 0;
+//     while(queue.length) {
+//         depth ++;
+//         let len = queue.length;
+//         for(let i = 0; i < len; i++) {
+//             let cur = queue.shift();
+//             for(let j = 1; j * j + cur <= n; j++) {
+//                 let next = j * j + cur;
+//                 if(next === n) return depth; 
+//                 if(next < n && !visited.has(next)) {
+//                     queue.push(next);
+//                     visited.add(next);
+//                 }
+//             }
+//         }
+//     }
+//     return distance;
+// };
+// 方法二：
+function isSquare(n) {
+    return Math.pow(parseInt(Math.pow(n,0.5)),2) === n
+}
 var numSquares = function(n) {
-    const queue = [];
-    const visited = new Set();
-    queue.push(0);
-    visited.add(0);
-    let depth = 0;
-    while(queue.length) {
-        depth ++;
-        let len = queue.length;
-        for(let i = 0; i < len; i++) {
-            let cur = queue.shift();
-            for(let j = 1; j * j + cur <= n; j++) {
-                let next = j * j + cur;
-                if(next === n) return depth; 
-                if(next < n && !visited.has(next)) {
-                    queue.push(next);
-                    visited.add(next);
-                }
+    let res = n;
+    const range = parseInt(n/2);
+    function helper(count,ans) {
+        if(count === n) {
+            return ans;
+        }
+        for(let i = range; i >= 1; i --) {
+            if(isSquare(i) && count + i <= n) {
+                const num = helper(count + i,ans+1);
+                debugger;
+                res = Math.min(res,num)
             }
         }
+        return Infinity
     }
-    return distance;
+    helper(0,0);
+    return res;
 };
+
 console.log(numSquares(12));
 </script>
 </body>

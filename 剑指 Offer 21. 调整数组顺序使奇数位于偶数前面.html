@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+
+//  方法一：首尾指针
+function swap(num,left,right) {
+    const temp = num[left];
+    temp = num[left];
+    num[left] = num[right];
+    num[right] = temp;
+}
+// var exchange = function(nums) {
+//     let left = 0,
+//         right = nums.length - 1;
+//     while(left < right) {
+//         if(nums[left] % 2 !== 0) {
+//             left ++;
+//             continue;
+//         }
+//         if(nums[right] % 2 !== 1) {
+//             right --;
+//             continue;
+//         }
+//         swap(nums,left,right);
+//         left ++ ;
+//         right --;
+//     }
+//     return nums;
+// };
+//  方法二：快慢双指针
+var exchange = function(nums) {
+    let low = 0,
+        fast = 0;
+    while(fast < nums.length) {
+        if(nums[fast] & 1) {
+            swap(nums,low,fast)
+            low ++;
+        }
+        fast ++;
+    }
+    return nums;
+};
+    </script>
+</body>
+</html>

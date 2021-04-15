@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/* 
+    解题思路：每次push 基于当前stack 迭代更新 min 属性 Math.min(this.head.min, val)
+    const minStack = new MinStack()
+    minStack.push(-2) -> [ { val: -2, min: -2 }] 
+    minStack.push(0) -> [ { val: -2, min: -2 }, { val: 0, min: -2 }] min = Math.min(-2, 0) => -2
+    minStack.push(-3) -> [ { val: -2, min: -2 }, { val: 0, min: -2 }, { val: -3, min: -3 }] 
+    minStack.min() -> head.min => -3
+    minStack.pop() -> 返回 { val: -3, min: -3 } 剩下 [ { val: -2, min: -2 }, { val: 0, min: -2 }] 
+    minStack.top() -> head.val => 0
+    minStack.min() -> head.min => -2
+*/
+class MinStack {
+    constructor () {
+        this.stack = []
+    }
+    push(val) {
+        // 若栈不为空 则迭代对比更新最值
+        this.stack.push({
+            val,
+            min: this.stack.length ? Math.min(this.head.min, val) : val
+        })
+    }
+    pop() {
+        this.stack.pop()
+    }
+    min() {
+       return this.head.min
+    }
+    top() {
+        return this.head.val
+    }
+    get head() { 
+        // 当前栈的最后一项 即栈顶头 head
+        return this.stack[this.stack.length - 1]
+    }
+}
+    </script>
+</body>
+</html>

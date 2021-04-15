@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ var isSymmetric = function(root) {
+    return root === null ? true : helper(root.left,root.right)
+};
+function helper(left,right) {
+    if(!left && !right) return true;
+    if(!left || !right || left.val !== right.val) return false;
+    return  helper(left.right,right.left) && helper(left.left,right.right);
+}
+    </script>
+</body>
+</html>

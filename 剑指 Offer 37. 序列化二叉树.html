@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+/**
+ * Encodes a tree to a single string.
+ *
+ * @param {TreeNode} root
+ * @return {string}
+ */
+var serialize = function(root) {
+    const stack = [root];
+    const res = []
+    for(let i = 0; i < stack.length; i++) {
+        if(stack[i] !== null) {
+            stack.push(stack[i].left)
+            stack.push(stack[i].right);
+        }
+        res.push(stack[i] !== null ? stack[i].val : null)
+    }
+    return JSON.stringify(res)
+};
+
+/**
+ * Decodes your encoded data to tree.
+ *
+ * @param {string} data
+ * @return {TreeNode}
+ */
+var deserialize = function(data) {
+    const arr = JSON.parse(data);
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] !== null) {
+            arr[i] = new TreeNode(arr[i]);
+        }
+    }
+    let count = 0;
+    for(let i = 0; i < arr.length && (2 * (i - count) + 2) < arr.length; i++) {
+        if(!arr[i]) {
+            count ++;
+            continue;
+        };
+        arr[i].left = arr[2 * (i - count) + 1]
+        arr[i].right = arr[2 * (i - count) + 2]
+    }
+    return arr[0]
+};
+
+/**
+ * Your functions will be called as such:
+ * deserialize(serialize(root));
+ */
+
+const root = new TreeNode(-1);
+root.left = new TreeNode(0);
+root.right = new TreeNode(1);
+// root.right.left = new TreeNode(4);
+// root.right.right = new TreeNode(5);
+
+console.log(deserialize(serialize(root)))
+    </script>
+</body>
+</html>
